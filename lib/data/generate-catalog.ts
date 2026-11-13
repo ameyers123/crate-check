@@ -32,6 +32,12 @@ export interface CatalogEntry {
   candidate: Candidate | null;
   /** Why this entry exists. Shown in the UI to explain each case. */
   scenario: Scenario;
+  /** Priority tier this track was triaged into. Real tier ids, generated assignment. */
+  priorityBand: string;
+  /** Which of the nine real sources surfaced it. */
+  source: string;
+  /** Release year. */
+  year: number;
 }
 
 /** mulberry32 — small, fast, deterministic. */
@@ -154,8 +160,45 @@ export function generateCatalog(seed = 20260413): CatalogEntry[] {
       expectedDurationS,
     };
 
-    return { track, candidate: buildCandidate(track, scenario, r), scenario };
+    return {
+      track,
+      candidate: buildCandidate(track, scenario, r),
+      scenario,
+      priorityBand: weightedPick(r, BAND_WEIGHTS),
+      source: weightedPick(r, SOURCE_WEIGHTS),
+      year: weightedPick(r, YEAR_WEIGHTS),
+    };
   });
+}
+
+/** Real tier ids and source names, weighted to match the real distribution. */
+const BAND_WEIGHTS: [string, number][] = [
+  ["P0", 5], ["P1", 247], ["P2", 25], ["P4", 104], ["P5", 23], ["P6", 85], ["P7", 2],
+];
+const SOURCE_WEIGHTS: [string, number][] = [
+  ["liked", 116],
+  ["beatport_top_100_indie_dance", 96],
+  ["indie_dance_2026_top_100", 84],
+  ["la_french_touch", 53],
+  ["damian_lazarus_radio", 48],
+  ["jamie_xx_radio", 47],
+  ["tinzo_jojo_groovy_sunset", 35],
+  ["i_love_whatever_this_is", 22],
+  ["chitiweiner_groovers", 1],
+];
+const YEAR_WEIGHTS: [number, number][] = [
+  [2026, 107], [2025, 103], [2024, 60], [2023, 30], [2022, 24],
+  [2021, 24], [2020, 20], [2019, 40], [2018, 40], [2016, 39],
+];
+
+function weightedPick<T>(r: () => number, weights: [T, number][]): T {
+  const total = weights.reduce((s, [, w]) => s + w, 0);
+  let x = r() * total;
+  for (const [value, w] of weights) {
+    x -= w;
+    if (x <= 0) return value;
+  }
+  return weights[weights.length - 1][0];
 }
 
 /** Construct the candidate a source would have returned under this scenario. */

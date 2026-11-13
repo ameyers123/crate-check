@@ -1,145 +1,125 @@
 # crate-check
 
-**A validation engine for automated media pipelines — because the system that fetches your files also writes their metadata.**
+**Building a 470-track DJ crate for a week in the desert — and the pipeline that got it there.**
 
-[**Live demo →**](https://crate-check-delta.vercel.app) · [How it decides](#what-it-actually-checks) · [What it caught](#what-it-caught)
+[**Walk through it →**](https://crate-check-delta.vercel.app)
 
 ---
 
-## The problem
+## What this is
 
-I built a pipeline to acquire ~500 tracks for a DJ library from an authoritative catalog. It reported near-total success. The files had correct artist tags, correct titles, correct ISRCs.
+A case study of a real project: assembling a DJ crate for a 2026 desert event. Nine places to dig, one hard deadline, 491 candidate tracks, and a dancefloor that notices when you get it wrong.
 
-A sample listen found a 7-minute DJ-set recording sitting where a 3:25 single should be. Correct artist. Correct title. Correct remix credit. Wrong audio.
+The site walks through all six stages. This README covers the same ground.
 
-The reason that got through is the part worth generalizing:
+## The six stages
 
-> **The component that fetches the file is usually the same component that writes the file's metadata.** So validating metadata against the catalog is circular. It proves the fetcher was internally consistent. It says nothing about whether the bytes are right.
+### 1. Discover — nine places the music comes from
 
-Any pipeline where an acquirer labels its own output has this hole: ETL jobs that stamp their own provenance, scrapers that record their own source URLs, ingestion services that tag their own payloads. The check feels like verification and is actually a tautology.
+Charts say what's big. Artist radio says what sits next to a sound you already trust. Curated playlists carry a point of view. Your own saves are the only source that knows what you actually reached for.
 
-## The approach
-
-Validate only on signals the fetcher **cannot author**:
-
-1. **The measured artifact** — decode the file and measure it. The fetcher can claim a runtime; it cannot make a 7-minute file be 3 minutes long.
-2. **Independent provenance** — what the *source* called this thing, retrieved separately from the fetch.
-
-And return **three** outcomes, not two:
-
-| | meaning | disposition |
+| source | kind | tracks |
 |---|---|---|
-| `PASS` | corroborated | goes to the library |
-| `REVIEW` | *unconfirmed* — nothing proved it right, nothing proved it wrong | short human queue |
-| `FAIL` | *contradicted* — a signal actively disagrees | quarantined with a reason |
+| `liked` | saved | 116 |
+| `beatport_top_100_indie_dance` | chart | 96 |
+| `indie_dance_2026_top_100` | chart | 84 |
+| `la_french_touch` | curated | 53 |
+| `damian_lazarus_radio` | artist radio | 48 |
+| `jamie_xx_radio` | artist radio | 47 |
+| `tinzo_jojo_groovy_sunset` | curated | 35 |
+| `i_love_whatever_this_is` | curated | 22 |
+| `chitiweiner_groovers` | curated | 1 |
 
-Binary pass/fail forces a bad trade. Treat "unconfirmed" as pass and unchecked files enter the library. Treat it as fail and good files get buried in a reject pile nobody reads, which means nobody reads the real failures either. The middle bucket is what makes the strict rules affordable — it stayed at 7% of the catalog, small enough to actually work through.
+Those add to more than 491, because a track can surface in several places at once — and that overlap turns out to be the most valuable signal in the pipeline. One algorithmic playlist recommending something is a guess. Two unrelated sources agreeing is evidence.
 
-## What it actually checks
+### 2. Reconcile — most of what you find, you already own
 
-```
-measured duration outside catalog window ──────────────→ FAIL (duration)
-source title carries a disqualifying token ────────────→ FAIL (version)
-   live · acapella · cover · karaoke · sped up · nightcore · instrumental
-source title announces a competing version ────────────→ FAIL (version)
-source title confirms the expected version ────────────→ PASS
-source title is silent, runtime near-exact ────────────→ REVIEW
-no source title at all, plain original expected ───────→ PASS  (runtime suffices)
-no source title at all, specific version expected ─────→ REVIEW
-```
+~1,200 raw candidates → **491 genuinely new**, after matching against the existing library.
 
-The duration gate runs first and catches most version errors incidentally — an "Extended Mix" standing in for an original is usually also 40% too long. The title rules are the second line, not a redundant one. In the demo you can widen the tolerance to absurdity and watch duration failures convert into version failures rather than disappear.
+This can't be a title match. 28 of these tracks share a title with a *different recording* — "The Future" exists as a 3:07 single and a 7:29 extended mix, and they're not interchangeable in a set. Matching on name either loses a track you wanted or quietly swaps one for another.
 
-## What it caught
+### 3. Prioritize — you can't dig everything
 
-Across 491 tracks in the real run, **108 files had correct metadata and wrong audio**:
+491 candidates is more than a week of listening, and a set has finite slots. The rubric scores two things: how **current** a track is, and how much **independent evidence** says it belongs.
 
-| what the tags said | what the file was | how it was caught |
+| tier | meaning | tracks |
 |---|---|---|
-| 3:25 single, correct remix credit | 7:04 DJ-set segment | 2.1× runtime |
-| studio track, 8:23 | 10:00 **acapella** — no beat at all | 1.2× runtime |
-| original mix | "Extended Mix", 1.5× long | runtime + title |
-| 3:07 track | 2:01 truncated upload | 0.65× runtime |
-| original | "(Live at …)" | disqualifying token |
+| P0 | 2026 release, corroborated across sources | 5 |
+| P1 | 2026 release, on a dance playlist | 247 |
+| P2 | 2026 release, personally saved | 25 |
+| P4 | Curated playlist, 2020 or later | 104 |
+| P5 | Curated playlist, back catalogue | 23 |
+| P6 | Recently saved (2025–26) | 85 |
+| P7 | Incidental playlist appearance | 2 |
 
-Not one of these is detectable by comparing tags to the catalog. Every one is obvious the moment you measure the file.
+The live demo has a budget slider: drag it to 25 tracks and only P0 survives — five records out of 491 where recency and two independent sources all agree. Everything below that line is a judgement call about how much risk the set can carry.
 
-## Two false positives worth keeping
+### 4. Acquire — the first approach failed on two thirds of the list
 
-Both of these shipped as bugs. Both are now switches in the demo — **turn them off and watch correct files get rejected in real time**.
+| attempt | recovered | lesson |
+|---|---|---|
+| One large batch | 172 / 464 | 63% failed — sustained traffic got throttled |
+| Retry the failures, twice | 0 / 292 | Zero. Including after a four-hour wait. |
+| Small paced waves | 193 / 292 | 66% recovered |
 
-**1. "Original Mix" is a synonym, not a conflict.** In dance-music convention `Original Mix` *is* the unremixed release. Scanning naively for the token `mix` flagged correctly-matched originals as version conflicts. Flipping this switch off in the demo turns 9 correct files red.
+The second row is the useful one. Retrying harder and then waiting hours both recovered exactly nothing, because **the limit was how fast requests arrived, not how many had been sent**. Patience was never going to be the lever. Naming the constraint correctly was worth more than any amount of effort spent against the wrong one.
 
-**2. Unconfirmed is not contradicted.** For a remix whose source title never names the remixer, the first rule said FAIL. But official uploads routinely omit remix credits from the title, and several of these files matched the catalog runtime *to the second*. Absence of proof isn't disproof: when the runtime is near-exact and nothing contradicts it, that's a REVIEW. This one mattered — it was the difference between a reviewable queue and silently discarding correct files.
+### 5. Verify — correct name, wrong recording
 
-The pattern in both: the rules were wrong in the direction of **over-rejecting**, and I only found out by reading verdicts against the actual audio. Both are pinned as regression tests in [`tests/validate.test.ts`](tests/validate.test.ts).
+Files arrived tagged perfectly: right artist, right title, right remix credit. Some of them were the wrong audio — a seven-minute festival set sitting where a three-minute single should be. You find that out now, or you find it out on stage.
 
-## The metric that lied
+**The tags can't tell you.** Whatever collected the file also wrote its labels, so checking the label against the plan only proves the collector agreed with itself. The only honest check is to open the file and measure what actually came back.
 
-Worth its own section, because it's the mistake I'd most want to not repeat.
+What "wrong" looked like in practice:
 
-A recovery pass reported **177/177 succeeded**. It had not. The real number was 169/177.
-
-The counter measured success as *"does this record have a `download_url`?"* — but that run worked by **pre-assigning** `download_url` to every record by design. The field was populated before any work happened. The metric was structurally incapable of returning anything but 100%.
-
-It was only caught because the file count didn't match the success count. The fix was to measure something the process couldn't pre-populate: entries appended to a completion log, which only grows on an actual write.
-
-A success metric that cannot report failure is not a success metric. If a number can't go down, it isn't measuring anything.
-
-## Results
-
-| | |
+| what arrived | caught by |
 |---|---|
-| Tracks targeted | 491 |
-| Validated into the library | 470 |
-| Wrong-audio files caught and quarantined | 108 |
-| Held for human review | 7% of catalog |
-| Unobtainable from any source | 6 |
+| A continuous festival set with the song buried inside | expected 4:51, got 11:08 |
+| An acapella — vocals, no beat, unmixable | runtime, then the label |
+| The extended mix when the original was planned for | 1.4× too long |
+| A truncated clip that cuts off partway | expected 5:12, got 2:54 |
+| A live recording — crowd noise, different arrangement | runtime looked fine; the label gave it away |
 
-Throughput was a separate problem with a separate lesson. Bulk retries against a rate-limited source returned **0 of 292** twice in a row, including after a four-hour cooldown. Restructuring into small paced batches instead of one large run recovered **193 of 292 (66%)** — the constraint was request *rate*, not total volume, and more waiting was never going to fix it.
+**108 files** arrived wrong this way. Verification caught all of them and they were re-collected properly. Without the check, 108 wrong recordings would be sitting in the crate right now with perfect tags — roughly one in four of everything collected.
 
-## Run it
+The rules needed tuning, not guessing. An early version rejected anything whose label didn't explicitly confirm the version, which threw out *correct* files — official uploads routinely drop the remix credit from the title. The fix was a third outcome: **"nothing confirms this" is not the same as "something contradicts this."** Unconfirmed files go to a short listen-through queue (~7% of the catalogue) instead of the bin.
+
+### 6. Crate — what ended up in the box
+
+**470 tracks that are what they say they are.**
+
+- **By era:** 107 from 2026, 103 from 2025, 60 from 2024, 102 from 2020–23, 119 pre-2020
+- **By version:** 372 originals, 88 remixes, 31 edits/extended
+- **Runtime spread:** 2:10 to 11:25, median 4:13
+
+A crate isn't a playlist. It's raw material for a set that hasn't been planned yet, so it needs range — openers, peaks, comedowns, and tracks long enough to mix out of. The weighting toward recent years keeps a set current; the quarter that predates 2020 is what a floor already knows.
+
+That 2:10–11:25 spread is also why the quality check can't use one percentage tolerance for everything. Five percent of an eleven-minute track is thirty-three seconds — wide enough to let an entirely different edit through.
+
+## Three things that generalise past music
+
+**A metric that can't go down isn't measuring anything.** One recovery pass reported 177 of 177 succeeded. It hadn't — the real number was 169. The counter measured a field the process filled in *before doing any work*, so it was structurally incapable of reporting failure. It surfaced only because a file count disagreed with it.
+
+**Name the constraint before optimising against it.** Two full retry cycles recovered nothing because the problem looked like volume and was actually rate.
+
+**"Unverified" and "wrong" need separate buckets.** Collapsing them forces a bad trade: trust everything and ship errors, or reject everything and bury the real failures where nobody reads them.
+
+## Running it
 
 ```bash
 npm install
-npm test          # 28 tests, including both false-positive regressions
-npm run verify    # validate the synthetic catalog, print the report
-npm run dev       # interactive playground at localhost:3000
+npm test        # 28 tests covering the verification rules
+npm run verify  # run the checks over the sample catalogue
+npm run dev     # the walkthrough, at localhost:3000
 ```
 
-Useful CLI flags:
+## About the data
 
-```bash
-npm run verify -- --tolerance 20              # widen the duration window
-npm run verify -- --no-original-mix-synonym   # reproduce false positive #1
-npm run verify -- --no-near-exact-downgrade   # reproduce false positive #2
-npm run verify -- --list FAIL                 # show every rejection and why
-```
+The **structure is real** — the nine sources, the priority tiers, the funnel counts, the throughput numbers, the outcomes. Individual **track titles and artists are generated**, so nothing here publishes a personal library. Generated ISRCs use the reserved `ZZ` country code, which is never issued, so none can collide with a real recording.
 
-## Architecture
+The verification step is real working code: the module the page runs in your browser is the same one the test suite covers.
 
-```
-lib/engine/        pure validation — no I/O, no dependencies beyond types
-  validate.ts        validateTrack(expected, actual, config) -> Verdict
-  vocab.ts           the controlled vocabularies
-  similarity.ts      small fuzzy matcher (REVIEW/FAIL boundary only, never PASS)
-lib/adapters/      the ingestion boundary
-  source-adapter.ts  interface SourceAdapter { find(track) -> Candidate | null }
-  mock-adapter.ts    the only implementation shipped here
-lib/data/          synthetic catalog generator + committed output
-cli/verify.ts      CLI report
-app/               the playground — runs the same engine, in the browser
-```
-
-The engine is pure functions. The CLI and the web playground import the *same* module, so the demo isn't a reimplementation that can drift from the real rules — toggling a switch on the page runs the code the tests pin.
-
-## Scope
-
-**crate-check validates; it does not acquire.** Ingestion lives behind a `SourceAdapter` interface and the only implementation in this repository is a deterministic mock. Nothing here downloads anything.
-
-All catalog data is **synthetic** — artists, titles and ISRCs are generated from word banks, and the ISRCs use the reserved `ZZ` country code, which is never issued, so no generated identifier can collide with a real recording. The demo reproduces the real failure taxonomy; it does not contain real catalog data.
-
-The outcome figures above are from the private run this tool was built for. The numbers in the live demo come from the synthetic catalog and will differ.
+**This project validates a collection; it does not acquire one.** How files get obtained sits behind an interface whose only implementation here is a stand-in.
 
 ## License
 
