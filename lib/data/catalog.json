@@ -1,0 +1,2903 @@
+[
+  {
+    "track": {
+      "id": "trk_0001",
+      "isrc": "ZZQE12600001",
+      "artist": "Kestrel Juno",
+      "title": "Static Garden",
+      "baseTitle": "Static Garden",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 399
+    },
+    "candidate": {
+      "sourceId": "src_0001",
+      "title": "Kestrel Juno - Static Garden",
+      "durationS": 399,
+      "measuredDurationS": 399
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0002",
+      "isrc": "ZZQE72600002",
+      "artist": "Onda, Juno",
+      "title": "Dusty Window - Oskar Vane Remix",
+      "baseTitle": "Dusty Window",
+      "versionText": "Oskar Vane Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 179
+    },
+    "candidate": {
+      "sourceId": "src_0002",
+      "title": "Onda, Juno - Dusty Window",
+      "durationS": 178,
+      "measuredDurationS": 178
+    },
+    "scenario": "unnamed_remixer_exact"
+  },
+  {
+    "track": {
+      "id": "trk_0003",
+      "isrc": "ZZQD22600003",
+      "artist": "Tessel Delos",
+      "title": "Drift Light",
+      "baseTitle": "Drift Light",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 203
+    },
+    "candidate": {
+      "sourceId": "src_0003",
+      "title": "Tessel Delos - Drift Light (Extended Mix)",
+      "durationS": 323,
+      "measuredDurationS": 323
+    },
+    "scenario": "extended_for_original"
+  },
+  {
+    "track": {
+      "id": "trk_0004",
+      "isrc": "ZZQB92600004",
+      "artist": "Mirrea, Hale",
+      "title": "Drift Motion - Mondo Bay Remix",
+      "baseTitle": "Drift Motion",
+      "versionText": "Mondo Bay Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 402
+    },
+    "candidate": {
+      "sourceId": "src_0004",
+      "title": "Mirrea, Hale - Drift Motion (Mondo Bay Remix)",
+      "durationS": 402,
+      "measuredDurationS": 402
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0005",
+      "isrc": "ZZQE72600005",
+      "artist": "Varda Avery",
+      "title": "Dusty Season",
+      "baseTitle": "Dusty Season",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 261
+    },
+    "candidate": {
+      "sourceId": "src_0005",
+      "title": "Varda Avery - Dusty Season",
+      "durationS": 262,
+      "measuredDurationS": 262
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0006",
+      "isrc": "ZZQE12600006",
+      "artist": "Vayle Hale",
+      "title": "Pale Light",
+      "baseTitle": "Pale Light",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 376
+    },
+    "candidate": {
+      "sourceId": "src_0006",
+      "title": "Vayle Hale - Pale Light",
+      "durationS": 375,
+      "measuredDurationS": 375
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0007",
+      "isrc": "ZZQC72600007",
+      "artist": "Kestrel, Soren",
+      "title": "Amber Lines",
+      "baseTitle": "Amber Lines",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 282
+    },
+    "candidate": {
+      "sourceId": "src_0007",
+      "title": "Kestrel, Soren - Amber Lines",
+      "durationS": 283,
+      "measuredDurationS": 283
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0008",
+      "isrc": "ZZQD12600008",
+      "artist": "Onda Avery",
+      "title": "Iron Orbit",
+      "baseTitle": "Iron Orbit",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 349
+    },
+    "candidate": {
+      "sourceId": "src_0008",
+      "title": "Onda Avery - Iron Orbit",
+      "durationS": 349,
+      "measuredDurationS": 349
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0009",
+      "isrc": "ZZQA22600009",
+      "artist": "Tombo Avery",
+      "title": "Soft Echo - Oskar Vane Remix",
+      "baseTitle": "Soft Echo",
+      "versionText": "Oskar Vane Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 374
+    },
+    "candidate": {
+      "sourceId": "src_0009",
+      "title": "Tombo Avery - Soft Echo (Oskar Vane Rmx)",
+      "durationS": 373,
+      "measuredDurationS": 373
+    },
+    "scenario": "fuzzy_remixer"
+  },
+  {
+    "track": {
+      "id": "trk_0010",
+      "isrc": "ZZQA22600010",
+      "artist": "Mirrea, Mesa",
+      "title": "Iron Shoreline",
+      "baseTitle": "Iron Shoreline",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 372
+    },
+    "candidate": {
+      "sourceId": "src_0010",
+      "title": "Mirrea, Mesa - Iron Shoreline",
+      "durationS": 372,
+      "measuredDurationS": 372
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0011",
+      "isrc": "ZZQA22600011",
+      "artist": "Caldo Lora",
+      "title": "Hollow Tape",
+      "baseTitle": "Hollow Tape",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 402
+    },
+    "candidate": {
+      "sourceId": "src_0011",
+      "title": "Caldo Lora - Hollow Tape",
+      "durationS": 403,
+      "measuredDurationS": 403
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0012",
+      "isrc": "ZZQC92600012",
+      "artist": "Tombo Ferro",
+      "title": "Glass Garden",
+      "baseTitle": "Glass Garden",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 290
+    },
+    "candidate": {
+      "sourceId": "src_0012",
+      "title": "",
+      "durationS": null,
+      "measuredDurationS": 291
+    },
+    "scenario": "no_provenance"
+  },
+  {
+    "track": {
+      "id": "trk_0013",
+      "isrc": "ZZQD92600013",
+      "artist": "Wyre Zeru",
+      "title": "Iron Frame",
+      "baseTitle": "Iron Frame",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 245
+    },
+    "candidate": {
+      "sourceId": "src_0013",
+      "title": "Wyre Zeru - Iron Frame",
+      "durationS": 244,
+      "measuredDurationS": 244
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0014",
+      "isrc": "ZZQE92600014",
+      "artist": "Brume Juno",
+      "title": "Open Water",
+      "baseTitle": "Open Water",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 290
+    },
+    "candidate": {
+      "sourceId": "src_0014",
+      "title": "Brume Juno - Open Water (Live at Hale Street)",
+      "durationS": 303,
+      "measuredDurationS": 303
+    },
+    "scenario": "live_cut"
+  },
+  {
+    "track": {
+      "id": "trk_0015",
+      "isrc": "ZZQE12600015",
+      "artist": "Orva Ferro",
+      "title": "Low Lines",
+      "baseTitle": "Low Lines",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 255
+    },
+    "candidate": {
+      "sourceId": "src_0015",
+      "title": "Orva Ferro - Low Lines (Extended Mix)",
+      "durationS": 386,
+      "measuredDurationS": 386
+    },
+    "scenario": "extended_for_original"
+  },
+  {
+    "track": {
+      "id": "trk_0016",
+      "isrc": "ZZQB22600016",
+      "artist": "Mirrea Hale",
+      "title": "Night Mornings - Rylo Remix",
+      "baseTitle": "Night Mornings",
+      "versionText": "Rylo Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 188
+    },
+    "candidate": {
+      "sourceId": "src_0016",
+      "title": "Mirrea Hale - Night Mornings",
+      "durationS": 188,
+      "measuredDurationS": 188
+    },
+    "scenario": "unnamed_remixer_exact"
+  },
+  {
+    "track": {
+      "id": "trk_0017",
+      "isrc": "ZZQC92600017",
+      "artist": "Varda Soren",
+      "title": "Iron Rooms - Noor Remix",
+      "baseTitle": "Iron Rooms",
+      "versionText": "Noor Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 208
+    },
+    "candidate": {
+      "sourceId": "src_0017",
+      "title": "Varda Soren - Iron Rooms (Noor Remix)",
+      "durationS": 208,
+      "measuredDurationS": 208
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0018",
+      "isrc": "ZZQE22600018",
+      "artist": "Caldo, Mesa",
+      "title": "Neon Frame",
+      "baseTitle": "Neon Frame",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 380
+    },
+    "candidate": {
+      "sourceId": "src_0018",
+      "title": "Caldo, Mesa - Neon Frame",
+      "durationS": 900,
+      "measuredDurationS": 900
+    },
+    "scenario": "dj_set_rip"
+  },
+  {
+    "track": {
+      "id": "trk_0019",
+      "isrc": "ZZQC92600019",
+      "artist": "Plume, Avery",
+      "title": "Soft Pulse",
+      "baseTitle": "Soft Pulse",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 329
+    },
+    "candidate": {
+      "sourceId": "src_0019",
+      "title": "Plume, Avery - Soft Pulse",
+      "durationS": 328,
+      "measuredDurationS": 328
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0020",
+      "isrc": "ZZQA22600020",
+      "artist": "Varda Delos",
+      "title": "Wild Drive - Delphi Remix",
+      "baseTitle": "Wild Drive",
+      "versionText": "Delphi Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 245
+    },
+    "candidate": {
+      "sourceId": "src_0020",
+      "title": "Varda Delos - Wild Drive",
+      "durationS": 517,
+      "measuredDurationS": 517
+    },
+    "scenario": "dj_set_rip"
+  },
+  {
+    "track": {
+      "id": "trk_0021",
+      "isrc": "ZZQA22600021",
+      "artist": "Brume, Hale",
+      "title": "Warm Window",
+      "baseTitle": "Warm Window",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 309
+    },
+    "candidate": {
+      "sourceId": "src_0021",
+      "title": "Brume, Hale - Warm Window",
+      "durationS": 309,
+      "measuredDurationS": 309
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0022",
+      "isrc": "ZZQC92600022",
+      "artist": "Vayle, Juno",
+      "title": "Open Water",
+      "baseTitle": "Open Water",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 303
+    },
+    "candidate": {
+      "sourceId": "src_0022",
+      "title": "Vayle, Juno - Open Water",
+      "durationS": 302,
+      "measuredDurationS": 302
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0023",
+      "isrc": "ZZQC92600023",
+      "artist": "Noct Zeru",
+      "title": "Tidal Orbit",
+      "baseTitle": "Tidal Orbit",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 174
+    },
+    "candidate": {
+      "sourceId": "src_0023",
+      "title": "Noct Zeru - Tidal Orbit (Extended Mix)",
+      "durationS": 276,
+      "measuredDurationS": 276
+    },
+    "scenario": "extended_for_original"
+  },
+  {
+    "track": {
+      "id": "trk_0024",
+      "isrc": "ZZQB12600024",
+      "artist": "Tessel Kirin",
+      "title": "Night Rooms",
+      "baseTitle": "Night Rooms",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 322
+    },
+    "candidate": {
+      "sourceId": "src_0024",
+      "title": "Tessel Kirin - Night Rooms",
+      "durationS": 322,
+      "measuredDurationS": 322
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0025",
+      "isrc": "ZZQD12600025",
+      "artist": "Serac Avery",
+      "title": "Open Shoreline",
+      "baseTitle": "Open Shoreline",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 183
+    },
+    "candidate": {
+      "sourceId": "src_0025",
+      "title": "Serac Avery - Open Shoreline",
+      "durationS": 182,
+      "measuredDurationS": 182
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0026",
+      "isrc": "ZZQE12600026",
+      "artist": "Mirrea Ines",
+      "title": "Slow Pulse - Extended Mix",
+      "baseTitle": "Slow Pulse",
+      "versionText": "Extended Mix",
+      "versionClass": "edit_or_extended",
+      "expectedDurationS": 194
+    },
+    "candidate": {
+      "sourceId": "src_0026",
+      "title": "Mirrea Ines - Slow Pulse (Extended Mix)",
+      "durationS": 195,
+      "measuredDurationS": 195
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0027",
+      "isrc": "ZZQC22600027",
+      "artist": "Caldo Mont",
+      "title": "Neon Orbit - Oskar Vane Remix",
+      "baseTitle": "Neon Orbit",
+      "versionText": "Oskar Vane Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 346
+    },
+    "candidate": {
+      "sourceId": "src_0027",
+      "title": "Caldo Mont - Neon Orbit",
+      "durationS": 347,
+      "measuredDurationS": 347
+    },
+    "scenario": "unnamed_remixer_exact"
+  },
+  {
+    "track": {
+      "id": "trk_0028",
+      "isrc": "ZZQA92600028",
+      "artist": "Adrift Ferro",
+      "title": "Low Hours - Radio Edit",
+      "baseTitle": "Low Hours",
+      "versionText": "Radio Edit",
+      "versionClass": "edit_or_extended",
+      "expectedDurationS": 228
+    },
+    "candidate": {
+      "sourceId": "src_0028",
+      "title": "Adrift Ferro - Low Hours (Radio Edit)",
+      "durationS": 229,
+      "measuredDurationS": 229
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0029",
+      "isrc": "ZZQD72600029",
+      "artist": "Caldo Ines",
+      "title": "Soft Orbit - Petra Oyo Remix",
+      "baseTitle": "Soft Orbit",
+      "versionText": "Petra Oyo Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 267
+    },
+    "candidate": {
+      "sourceId": "src_0029",
+      "title": "Caldo Ines - Soft Orbit (Petra Oyo Remix)",
+      "durationS": 267,
+      "measuredDurationS": 267
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0030",
+      "isrc": "ZZQA72600030",
+      "artist": "Tessel Hale",
+      "title": "Tidal Signal",
+      "baseTitle": "Tidal Signal",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 351
+    },
+    "candidate": {
+      "sourceId": "src_0030",
+      "title": "Tessel Hale - Tidal Signal",
+      "durationS": 350,
+      "measuredDurationS": 350
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0031",
+      "isrc": "ZZQE22600031",
+      "artist": "Orva Mont",
+      "title": "Hollow Light",
+      "baseTitle": "Hollow Light",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 366
+    },
+    "candidate": {
+      "sourceId": "src_0031",
+      "title": "Orva Mont - Hollow Light",
+      "durationS": 846,
+      "measuredDurationS": 846
+    },
+    "scenario": "dj_set_rip"
+  },
+  {
+    "track": {
+      "id": "trk_0032",
+      "isrc": "ZZQD22600032",
+      "artist": "Pell Ferro",
+      "title": "Quiet Water",
+      "baseTitle": "Quiet Water",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 325
+    },
+    "candidate": {
+      "sourceId": "src_0032",
+      "title": "Pell Ferro - Quiet Water",
+      "durationS": 325,
+      "measuredDurationS": 325
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0033",
+      "isrc": "ZZQA92600033",
+      "artist": "Pell Mont",
+      "title": "Slow Window - Dub Mix",
+      "baseTitle": "Slow Window",
+      "versionText": "Dub Mix",
+      "versionClass": "edit_or_extended",
+      "expectedDurationS": 270
+    },
+    "candidate": {
+      "sourceId": "src_0033",
+      "title": "Pell Mont - Slow Window (Dub Mix)",
+      "durationS": 271,
+      "measuredDurationS": 271
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0034",
+      "isrc": "ZZQC72600034",
+      "artist": "Niva Ines",
+      "title": "Slow Drive - Hartline Remix",
+      "baseTitle": "Slow Drive",
+      "versionText": "Hartline Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 272
+    },
+    "candidate": {
+      "sourceId": "src_0034",
+      "title": "Niva Ines - Slow Drive",
+      "durationS": 271,
+      "measuredDurationS": 271
+    },
+    "scenario": "unnamed_remixer_exact"
+  },
+  {
+    "track": {
+      "id": "trk_0035",
+      "isrc": "ZZQD72600035",
+      "artist": "Wyre, Mont",
+      "title": "Velvet Garden - Extended Mix",
+      "baseTitle": "Velvet Garden",
+      "versionText": "Extended Mix",
+      "versionClass": "edit_or_extended",
+      "expectedDurationS": 268
+    },
+    "candidate": {
+      "sourceId": "src_0035",
+      "title": "Wyre, Mont - Velvet Garden",
+      "durationS": 561,
+      "measuredDurationS": 561
+    },
+    "scenario": "dj_set_rip"
+  },
+  {
+    "track": {
+      "id": "trk_0036",
+      "isrc": "ZZQB72600036",
+      "artist": "Tombo Delos",
+      "title": "Static Pulse - Hartline Remix",
+      "baseTitle": "Static Pulse",
+      "versionText": "Hartline Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 248
+    },
+    "candidate": {
+      "sourceId": "src_0036",
+      "title": "Tombo Delos - Static Pulse (Hartline Remix)",
+      "durationS": 248,
+      "measuredDurationS": 248
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0037",
+      "isrc": "ZZQD92600037",
+      "artist": "Ulva Avery",
+      "title": "Open Drive - Noor Remix",
+      "baseTitle": "Open Drive",
+      "versionText": "Noor Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 385
+    },
+    "candidate": {
+      "sourceId": "src_0037",
+      "title": "Ulva Avery - Open Drive",
+      "durationS": 384,
+      "measuredDurationS": 384
+    },
+    "scenario": "unnamed_remixer_exact"
+  },
+  {
+    "track": {
+      "id": "trk_0038",
+      "isrc": "ZZQE22600038",
+      "artist": "Mirrea Delos",
+      "title": "Night Weather",
+      "baseTitle": "Night Weather",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 402
+    },
+    "candidate": {
+      "sourceId": "src_0038",
+      "title": "Mirrea Delos - Night Weather",
+      "durationS": 401,
+      "measuredDurationS": 401
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0039",
+      "isrc": "ZZQA72600039",
+      "artist": "Ulva Kirin",
+      "title": "Cobalt Window",
+      "baseTitle": "Cobalt Window",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 178
+    },
+    "candidate": {
+      "sourceId": "src_0039",
+      "title": "Ulva Kirin - Cobalt Window (Extended Mix)",
+      "durationS": 255,
+      "measuredDurationS": 255
+    },
+    "scenario": "extended_for_original"
+  },
+  {
+    "track": {
+      "id": "trk_0040",
+      "isrc": "ZZQB72600040",
+      "artist": "Ulva Juno",
+      "title": "Hollow Window",
+      "baseTitle": "Hollow Window",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 359
+    },
+    "candidate": {
+      "sourceId": "src_0040",
+      "title": "Ulva Juno - Hollow Window",
+      "durationS": 359,
+      "measuredDurationS": 359
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0041",
+      "isrc": "ZZQA12600041",
+      "artist": "Zonda Rue",
+      "title": "Paper Water",
+      "baseTitle": "Paper Water",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 290
+    },
+    "candidate": {
+      "sourceId": "src_0041",
+      "title": "Zonda Rue - Paper Water",
+      "durationS": 291,
+      "measuredDurationS": 291
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0042",
+      "isrc": "ZZQE22600042",
+      "artist": "Kolm Mesa",
+      "title": "Paper Season",
+      "baseTitle": "Paper Season",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 167
+    },
+    "candidate": {
+      "sourceId": "src_0042",
+      "title": "Kolm Mesa - Paper Season",
+      "durationS": 111,
+      "measuredDurationS": 111
+    },
+    "scenario": "snippet"
+  },
+  {
+    "track": {
+      "id": "trk_0043",
+      "isrc": "ZZQA22600043",
+      "artist": "Lumen, Lis",
+      "title": "Dusty Rooms",
+      "baseTitle": "Dusty Rooms",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 187
+    },
+    "candidate": {
+      "sourceId": "src_0043",
+      "title": "Lumen, Lis - Dusty Rooms (Original Mix)",
+      "durationS": 188,
+      "measuredDurationS": 188
+    },
+    "scenario": "original_mix_label"
+  },
+  {
+    "track": {
+      "id": "trk_0044",
+      "isrc": "ZZQC12600044",
+      "artist": "Niva Kade",
+      "title": "Drift Rooms",
+      "baseTitle": "Drift Rooms",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 369
+    },
+    "candidate": {
+      "sourceId": "src_0044",
+      "title": "Niva Kade - Drift Rooms",
+      "durationS": 370,
+      "measuredDurationS": 370
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0045",
+      "isrc": "ZZQA72600045",
+      "artist": "Vayle Mont",
+      "title": "Quiet Orbit",
+      "baseTitle": "Quiet Orbit",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 211
+    },
+    "candidate": {
+      "sourceId": "src_0045",
+      "title": "Vayle Mont - Quiet Orbit",
+      "durationS": 211,
+      "measuredDurationS": 211
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0046",
+      "isrc": "ZZQD22600046",
+      "artist": "Sable, Zeru",
+      "title": "Copper Pulse - Sable Remix",
+      "baseTitle": "Copper Pulse",
+      "versionText": "Sable Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 358
+    },
+    "candidate": {
+      "sourceId": "src_0046",
+      "title": "Sable, Zeru - Copper Pulse",
+      "durationS": 359,
+      "measuredDurationS": 359
+    },
+    "scenario": "unnamed_remixer_exact"
+  },
+  {
+    "track": {
+      "id": "trk_0047",
+      "isrc": "ZZQC72600047",
+      "artist": "Adrift Rue",
+      "title": "Copper Season",
+      "baseTitle": "Copper Season",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 369
+    },
+    "candidate": {
+      "sourceId": "src_0047",
+      "title": "Adrift Rue - Copper Season",
+      "durationS": 368,
+      "measuredDurationS": 368
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0048",
+      "isrc": "ZZQC92600048",
+      "artist": "Tessel Soren",
+      "title": "Salt Orbit",
+      "baseTitle": "Salt Orbit",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 354
+    },
+    "candidate": {
+      "sourceId": "src_0048",
+      "title": "Tessel Soren - Salt Orbit",
+      "durationS": 354,
+      "measuredDurationS": 354
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0049",
+      "isrc": "ZZQE72600049",
+      "artist": "Tombo Kade",
+      "title": "Paper Water",
+      "baseTitle": "Paper Water",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 266
+    },
+    "candidate": {
+      "sourceId": "src_0049",
+      "title": "Tombo Kade - Paper Water",
+      "durationS": 266,
+      "measuredDurationS": 266
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0050",
+      "isrc": "ZZQD72600050",
+      "artist": "Brume, Rue",
+      "title": "Harbor Drive - Oskar Vane Remix",
+      "baseTitle": "Harbor Drive",
+      "versionText": "Oskar Vane Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 276
+    },
+    "candidate": {
+      "sourceId": "src_0050",
+      "title": "Brume, Rue - Harbor Drive",
+      "durationS": 277,
+      "measuredDurationS": 277
+    },
+    "scenario": "unnamed_remixer_exact"
+  },
+  {
+    "track": {
+      "id": "trk_0051",
+      "isrc": "ZZQE12600051",
+      "artist": "Zonda Kade",
+      "title": "Amber Circuit",
+      "baseTitle": "Amber Circuit",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 363
+    },
+    "candidate": {
+      "sourceId": "src_0051",
+      "title": "Zonda Kade - Amber Circuit (Live at Hale Street)",
+      "durationS": 364,
+      "measuredDurationS": 364
+    },
+    "scenario": "live_cut"
+  },
+  {
+    "track": {
+      "id": "trk_0052",
+      "isrc": "ZZQA22600052",
+      "artist": "Tessel Juno",
+      "title": "Pale Season",
+      "baseTitle": "Pale Season",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 219
+    },
+    "candidate": {
+      "sourceId": "src_0052",
+      "title": "Tessel Juno - Pale Season (Acappella)",
+      "durationS": 265,
+      "measuredDurationS": 265
+    },
+    "scenario": "acapella"
+  },
+  {
+    "track": {
+      "id": "trk_0053",
+      "isrc": "ZZQB12600053",
+      "artist": "Adrift Rue",
+      "title": "Tidal Current",
+      "baseTitle": "Tidal Current",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 316
+    },
+    "candidate": {
+      "sourceId": "src_0053",
+      "title": "Adrift Rue - Tidal Current",
+      "durationS": 316,
+      "measuredDurationS": 316
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0054",
+      "isrc": "ZZQD12600054",
+      "artist": "Lumen Delos",
+      "title": "Warm Orbit",
+      "baseTitle": "Warm Orbit",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 251
+    },
+    "candidate": {
+      "sourceId": "src_0054",
+      "title": "Lumen Delos - Warm Orbit (Extended Mix)",
+      "durationS": 383,
+      "measuredDurationS": 383
+    },
+    "scenario": "extended_for_original"
+  },
+  {
+    "track": {
+      "id": "trk_0055",
+      "isrc": "ZZQE12600055",
+      "artist": "Plume Juno",
+      "title": "Soft Echo - Mondo Bay Remix",
+      "baseTitle": "Soft Echo",
+      "versionText": "Mondo Bay Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 342
+    },
+    "candidate": {
+      "sourceId": "src_0055",
+      "title": "",
+      "durationS": null,
+      "measuredDurationS": 343
+    },
+    "scenario": "no_provenance"
+  },
+  {
+    "track": {
+      "id": "trk_0056",
+      "isrc": "ZZQE72600056",
+      "artist": "Varda Rue",
+      "title": "Slow Signal",
+      "baseTitle": "Slow Signal",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 300
+    },
+    "candidate": {
+      "sourceId": "src_0056",
+      "title": "Varda Rue - Slow Signal",
+      "durationS": 199,
+      "measuredDurationS": 199
+    },
+    "scenario": "snippet"
+  },
+  {
+    "track": {
+      "id": "trk_0057",
+      "isrc": "ZZQD12600057",
+      "artist": "Serac, Mont",
+      "title": "Drift Frame - Sable Remix",
+      "baseTitle": "Drift Frame",
+      "versionText": "Sable Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 252
+    },
+    "candidate": {
+      "sourceId": "src_0057",
+      "title": "Serac, Mont - Drift Frame (Sable Remix)",
+      "durationS": 251,
+      "measuredDurationS": 251
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0058",
+      "isrc": "ZZQC22600058",
+      "artist": "Plume Ines",
+      "title": "Iron Garden",
+      "baseTitle": "Iron Garden",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 223
+    },
+    "candidate": {
+      "sourceId": "src_0058",
+      "title": "Plume Ines - Iron Garden",
+      "durationS": 224,
+      "measuredDurationS": 224
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0059",
+      "isrc": "ZZQA92600059",
+      "artist": "Plume Kirin",
+      "title": "Glass Season - Radio Edit",
+      "baseTitle": "Glass Season",
+      "versionText": "Radio Edit",
+      "versionClass": "edit_or_extended",
+      "expectedDurationS": 396
+    },
+    "candidate": {
+      "sourceId": "src_0059",
+      "title": "Plume Kirin - Glass Season",
+      "durationS": 786,
+      "measuredDurationS": 786
+    },
+    "scenario": "dj_set_rip"
+  },
+  {
+    "track": {
+      "id": "trk_0060",
+      "isrc": "ZZQA12600060",
+      "artist": "Niva Toma",
+      "title": "Paper Window",
+      "baseTitle": "Paper Window",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 203
+    },
+    "candidate": {
+      "sourceId": "src_0060",
+      "title": "Niva Toma - Paper Window",
+      "durationS": 202,
+      "measuredDurationS": 202
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0061",
+      "isrc": "ZZQD72600061",
+      "artist": "Tessel Ferro",
+      "title": "Iron Hum - Club Mix",
+      "baseTitle": "Iron Hum",
+      "versionText": "Club Mix",
+      "versionClass": "edit_or_extended",
+      "expectedDurationS": 393
+    },
+    "candidate": {
+      "sourceId": "src_0061",
+      "title": "Tessel Ferro - Iron Hum (Club Mix)",
+      "durationS": 394,
+      "measuredDurationS": 394
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0062",
+      "isrc": "ZZQC12600062",
+      "artist": "Niva, Rue",
+      "title": "Night Tape",
+      "baseTitle": "Night Tape",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 350
+    },
+    "candidate": {
+      "sourceId": "src_0062",
+      "title": "Niva, Rue - Night Tape",
+      "durationS": 349,
+      "measuredDurationS": 349
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0063",
+      "isrc": "ZZQB22600063",
+      "artist": "Orva Ines",
+      "title": "Velvet Mornings",
+      "baseTitle": "Velvet Mornings",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 319
+    },
+    "candidate": {
+      "sourceId": "src_0063",
+      "title": "Orva Ines - Velvet Mornings",
+      "durationS": 320,
+      "measuredDurationS": 320
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0064",
+      "isrc": "ZZQE22600064",
+      "artist": "Lumen Lora",
+      "title": "Iron Season",
+      "baseTitle": "Iron Season",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 329
+    },
+    "candidate": {
+      "sourceId": "src_0064",
+      "title": "Lumen Lora - Iron Season",
+      "durationS": 328,
+      "measuredDurationS": 328
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0065",
+      "isrc": "ZZQB92600065",
+      "artist": "Caldo, Delos",
+      "title": "Hollow Orbit",
+      "baseTitle": "Hollow Orbit",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 204
+    },
+    "candidate": {
+      "sourceId": "src_0065",
+      "title": "Caldo, Delos - Hollow Orbit (Original Mix)",
+      "durationS": 205,
+      "measuredDurationS": 205
+    },
+    "scenario": "original_mix_label"
+  },
+  {
+    "track": {
+      "id": "trk_0066",
+      "isrc": "ZZQA22600066",
+      "artist": "Mirrea Zeru",
+      "title": "Open Pulse",
+      "baseTitle": "Open Pulse",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 275
+    },
+    "candidate": {
+      "sourceId": "src_0066",
+      "title": "Mirrea Zeru - Open Pulse",
+      "durationS": 275,
+      "measuredDurationS": 275
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0067",
+      "isrc": "ZZQE22600067",
+      "artist": "Adrift, Ferro",
+      "title": "Paper Season",
+      "baseTitle": "Paper Season",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 263
+    },
+    "candidate": {
+      "sourceId": "src_0067",
+      "title": "Adrift, Ferro - Paper Season (Original Mix)",
+      "durationS": 263,
+      "measuredDurationS": 263
+    },
+    "scenario": "original_mix_label"
+  },
+  {
+    "track": {
+      "id": "trk_0068",
+      "isrc": "ZZQA22600068",
+      "artist": "Brume Avery",
+      "title": "Copper Pulse",
+      "baseTitle": "Copper Pulse",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 241
+    },
+    "candidate": {
+      "sourceId": "src_0068",
+      "title": "Brume Avery - Copper Pulse",
+      "durationS": 241,
+      "measuredDurationS": 241
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0069",
+      "isrc": "ZZQC92600069",
+      "artist": "Vayle Hale",
+      "title": "Open Light - Hartline Remix",
+      "baseTitle": "Open Light",
+      "versionText": "Hartline Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 196
+    },
+    "candidate": {
+      "sourceId": "src_0069",
+      "title": "Vayle Hale - Open Light (Hartline Rmx)",
+      "durationS": 196,
+      "measuredDurationS": 196
+    },
+    "scenario": "fuzzy_remixer"
+  },
+  {
+    "track": {
+      "id": "trk_0070",
+      "isrc": "ZZQB92600070",
+      "artist": "Lumen Kirin",
+      "title": "Iron Water",
+      "baseTitle": "Iron Water",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 385
+    },
+    "candidate": {
+      "sourceId": "src_0070",
+      "title": "Lumen Kirin - Iron Water (Original Mix)",
+      "durationS": 386,
+      "measuredDurationS": 386
+    },
+    "scenario": "original_mix_label"
+  },
+  {
+    "track": {
+      "id": "trk_0071",
+      "isrc": "ZZQB72600071",
+      "artist": "Serac Avery",
+      "title": "Slow Rooms - Mondo Bay Remix",
+      "baseTitle": "Slow Rooms",
+      "versionText": "Mondo Bay Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 243
+    },
+    "candidate": null,
+    "scenario": "missing"
+  },
+  {
+    "track": {
+      "id": "trk_0072",
+      "isrc": "ZZQE72600072",
+      "artist": "Ulva Kade",
+      "title": "Copper Light - Kov Remix",
+      "baseTitle": "Copper Light",
+      "versionText": "Kov Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 338
+    },
+    "candidate": {
+      "sourceId": "src_0072",
+      "title": "Ulva Kade - Copper Light (Kov Remix)",
+      "durationS": 339,
+      "measuredDurationS": 339
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0073",
+      "isrc": "ZZQD72600073",
+      "artist": "Lumen Kirin",
+      "title": "Paper Pulse",
+      "baseTitle": "Paper Pulse",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 264
+    },
+    "candidate": {
+      "sourceId": "src_0073",
+      "title": "Lumen Kirin - Paper Pulse",
+      "durationS": 265,
+      "measuredDurationS": 265
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0074",
+      "isrc": "ZZQE12600074",
+      "artist": "Tombo Kirin",
+      "title": "Pale Hum",
+      "baseTitle": "Pale Hum",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 288
+    },
+    "candidate": {
+      "sourceId": "src_0074",
+      "title": "Tombo Kirin - Pale Hum",
+      "durationS": 288,
+      "measuredDurationS": 288
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0075",
+      "isrc": "ZZQA92600075",
+      "artist": "Noct, Lis",
+      "title": "Hollow Pulse",
+      "baseTitle": "Hollow Pulse",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 326
+    },
+    "candidate": {
+      "sourceId": "src_0075",
+      "title": "Noct, Lis - Hollow Pulse",
+      "durationS": 327,
+      "measuredDurationS": 327
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0076",
+      "isrc": "ZZQD92600076",
+      "artist": "Pell Toma",
+      "title": "Wild Hours",
+      "baseTitle": "Wild Hours",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 349
+    },
+    "candidate": {
+      "sourceId": "src_0076",
+      "title": "Pell Toma - Wild Hours",
+      "durationS": 350,
+      "measuredDurationS": 350
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0077",
+      "isrc": "ZZQE12600077",
+      "artist": "Lumen Lis",
+      "title": "Static Drive",
+      "baseTitle": "Static Drive",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 189
+    },
+    "candidate": {
+      "sourceId": "src_0077",
+      "title": "Lumen Lis - Static Drive",
+      "durationS": 189,
+      "measuredDurationS": 189
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0078",
+      "isrc": "ZZQE92600078",
+      "artist": "Kolm Delos",
+      "title": "Soft Pulse - Radio Edit",
+      "baseTitle": "Soft Pulse",
+      "versionText": "Radio Edit",
+      "versionClass": "edit_or_extended",
+      "expectedDurationS": 205
+    },
+    "candidate": {
+      "sourceId": "src_0078",
+      "title": "Kolm Delos - Soft Pulse",
+      "durationS": 130,
+      "measuredDurationS": 130
+    },
+    "scenario": "snippet"
+  },
+  {
+    "track": {
+      "id": "trk_0079",
+      "isrc": "ZZQD72600079",
+      "artist": "Pell Mesa",
+      "title": "Quiet Mornings - Ferris Tate Remix",
+      "baseTitle": "Quiet Mornings",
+      "versionText": "Ferris Tate Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 328
+    },
+    "candidate": {
+      "sourceId": "src_0079",
+      "title": "Pell Mesa - Quiet Mornings (Ferris Tate Remix)",
+      "durationS": 329,
+      "measuredDurationS": 329
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0080",
+      "isrc": "ZZQB12600080",
+      "artist": "Shor Kade",
+      "title": "Glass Echo - Dub Mix",
+      "baseTitle": "Glass Echo",
+      "versionText": "Dub Mix",
+      "versionClass": "edit_or_extended",
+      "expectedDurationS": 176
+    },
+    "candidate": {
+      "sourceId": "src_0080",
+      "title": "Shor Kade - Glass Echo (Dub Mix)",
+      "durationS": 177,
+      "measuredDurationS": 177
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0081",
+      "isrc": "ZZQB22600081",
+      "artist": "Tessel Zeru",
+      "title": "Tidal Circuit - Extended Mix",
+      "baseTitle": "Tidal Circuit",
+      "versionText": "Extended Mix",
+      "versionClass": "edit_or_extended",
+      "expectedDurationS": 232
+    },
+    "candidate": {
+      "sourceId": "src_0081",
+      "title": "Tessel Zeru - Tidal Circuit (Extended Mix)",
+      "durationS": 231,
+      "measuredDurationS": 231
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0082",
+      "isrc": "ZZQD72600082",
+      "artist": "Halden, Soren",
+      "title": "Salt Mornings - Club Mix",
+      "baseTitle": "Salt Mornings",
+      "versionText": "Club Mix",
+      "versionClass": "edit_or_extended",
+      "expectedDurationS": 336
+    },
+    "candidate": {
+      "sourceId": "src_0082",
+      "title": "",
+      "durationS": null,
+      "measuredDurationS": 335
+    },
+    "scenario": "no_provenance"
+  },
+  {
+    "track": {
+      "id": "trk_0083",
+      "isrc": "ZZQB12600083",
+      "artist": "Ulva, Kirin",
+      "title": "Glass Window - Cassio Remix",
+      "baseTitle": "Glass Window",
+      "versionText": "Cassio Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 376
+    },
+    "candidate": {
+      "sourceId": "src_0083",
+      "title": "Ulva, Kirin - Glass Window (Cassio Remix)",
+      "durationS": 377,
+      "measuredDurationS": 377
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0084",
+      "isrc": "ZZQA22600084",
+      "artist": "Zonda, Lora",
+      "title": "Low Weather",
+      "baseTitle": "Low Weather",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 202
+    },
+    "candidate": {
+      "sourceId": "src_0084",
+      "title": "Zonda, Lora - Low Weather",
+      "durationS": 415,
+      "measuredDurationS": 415
+    },
+    "scenario": "dj_set_rip"
+  },
+  {
+    "track": {
+      "id": "trk_0085",
+      "isrc": "ZZQE12600085",
+      "artist": "Tessel Juno",
+      "title": "Dusty Tape",
+      "baseTitle": "Dusty Tape",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 223
+    },
+    "candidate": {
+      "sourceId": "src_0085",
+      "title": "Tessel Juno - Dusty Tape (Original Mix)",
+      "durationS": 224,
+      "measuredDurationS": 224
+    },
+    "scenario": "original_mix_label"
+  },
+  {
+    "track": {
+      "id": "trk_0086",
+      "isrc": "ZZQD12600086",
+      "artist": "Noct Zeru",
+      "title": "Soft Tape - Delphi Remix",
+      "baseTitle": "Soft Tape",
+      "versionText": "Delphi Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 165
+    },
+    "candidate": {
+      "sourceId": "src_0086",
+      "title": "Noct Zeru - Soft Tape",
+      "durationS": 100,
+      "measuredDurationS": 100
+    },
+    "scenario": "snippet"
+  },
+  {
+    "track": {
+      "id": "trk_0087",
+      "isrc": "ZZQA92600087",
+      "artist": "Onda Zeru",
+      "title": "Neon Light",
+      "baseTitle": "Neon Light",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 169
+    },
+    "candidate": {
+      "sourceId": "src_0087",
+      "title": "Onda Zeru - Neon Light",
+      "durationS": 169,
+      "measuredDurationS": 169
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0088",
+      "isrc": "ZZQC72600088",
+      "artist": "Onda Lora",
+      "title": "Low Garden - Radio Edit",
+      "baseTitle": "Low Garden",
+      "versionText": "Radio Edit",
+      "versionClass": "edit_or_extended",
+      "expectedDurationS": 270
+    },
+    "candidate": {
+      "sourceId": "src_0088",
+      "title": "Onda Lora - Low Garden",
+      "durationS": 186,
+      "measuredDurationS": 186
+    },
+    "scenario": "snippet"
+  },
+  {
+    "track": {
+      "id": "trk_0089",
+      "isrc": "ZZQC72600089",
+      "artist": "Shor Mont",
+      "title": "Slow Tape - Dub Mix",
+      "baseTitle": "Slow Tape",
+      "versionText": "Dub Mix",
+      "versionClass": "edit_or_extended",
+      "expectedDurationS": 349
+    },
+    "candidate": {
+      "sourceId": "src_0089",
+      "title": "Shor Mont - Slow Tape (Dub Mix)",
+      "durationS": 349,
+      "measuredDurationS": 349
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0090",
+      "isrc": "ZZQC22600090",
+      "artist": "Kolm Lora",
+      "title": "Wild Garden - Cassio Remix",
+      "baseTitle": "Wild Garden",
+      "versionText": "Cassio Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 391
+    },
+    "candidate": {
+      "sourceId": "src_0090",
+      "title": "Kolm Lora - Wild Garden",
+      "durationS": 391,
+      "measuredDurationS": 391
+    },
+    "scenario": "unnamed_remixer_exact"
+  },
+  {
+    "track": {
+      "id": "trk_0091",
+      "isrc": "ZZQC22600091",
+      "artist": "Kestrel, Delos",
+      "title": "Quiet Season",
+      "baseTitle": "Quiet Season",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 394
+    },
+    "candidate": null,
+    "scenario": "missing"
+  },
+  {
+    "track": {
+      "id": "trk_0092",
+      "isrc": "ZZQA72600092",
+      "artist": "Niva Ines",
+      "title": "Low Light",
+      "baseTitle": "Low Light",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 283
+    },
+    "candidate": {
+      "sourceId": "src_0092",
+      "title": "Niva Ines - Low Light",
+      "durationS": 283,
+      "measuredDurationS": 283
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0093",
+      "isrc": "ZZQD22600093",
+      "artist": "Brume, Juno",
+      "title": "Low Hours - Sable Remix",
+      "baseTitle": "Low Hours",
+      "versionText": "Sable Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 400
+    },
+    "candidate": {
+      "sourceId": "src_0093",
+      "title": "Brume, Juno - Low Hours (Sable Remix)",
+      "durationS": 400,
+      "measuredDurationS": 400
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0094",
+      "isrc": "ZZQC92600094",
+      "artist": "Serac Mesa",
+      "title": "Soft Season",
+      "baseTitle": "Soft Season",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 326
+    },
+    "candidate": {
+      "sourceId": "src_0094",
+      "title": "Serac Mesa - Soft Season (Extended Mix)",
+      "durationS": 445,
+      "measuredDurationS": 445
+    },
+    "scenario": "extended_for_original"
+  },
+  {
+    "track": {
+      "id": "trk_0095",
+      "isrc": "ZZQB72600095",
+      "artist": "Varda Kade",
+      "title": "Glass Drive",
+      "baseTitle": "Glass Drive",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 179
+    },
+    "candidate": {
+      "sourceId": "src_0095",
+      "title": "Varda Kade - Glass Drive (Extended Mix)",
+      "durationS": 268,
+      "measuredDurationS": 268
+    },
+    "scenario": "extended_for_original"
+  },
+  {
+    "track": {
+      "id": "trk_0096",
+      "isrc": "ZZQD72600096",
+      "artist": "Ulva, Hale",
+      "title": "Quiet Weather",
+      "baseTitle": "Quiet Weather",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 354
+    },
+    "candidate": {
+      "sourceId": "src_0096",
+      "title": "Ulva, Hale - Quiet Weather",
+      "durationS": 354,
+      "measuredDurationS": 354
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0097",
+      "isrc": "ZZQC22600097",
+      "artist": "Onda Avery",
+      "title": "Copper Garden - Mondo Bay Remix",
+      "baseTitle": "Copper Garden",
+      "versionText": "Mondo Bay Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 295
+    },
+    "candidate": {
+      "sourceId": "src_0097",
+      "title": "Onda Avery - Copper Garden (Mondo Bay Remix)",
+      "durationS": 294,
+      "measuredDurationS": 294
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0098",
+      "isrc": "ZZQB12600098",
+      "artist": "Sable Kirin",
+      "title": "Pale Rooms",
+      "baseTitle": "Pale Rooms",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 236
+    },
+    "candidate": {
+      "sourceId": "src_0098",
+      "title": "Sable Kirin - Pale Rooms (Live at Hale Street)",
+      "durationS": 239,
+      "measuredDurationS": 239
+    },
+    "scenario": "live_cut"
+  },
+  {
+    "track": {
+      "id": "trk_0099",
+      "isrc": "ZZQA72600099",
+      "artist": "Tombo Soren",
+      "title": "Pale Motion - Radio Edit",
+      "baseTitle": "Pale Motion",
+      "versionText": "Radio Edit",
+      "versionClass": "edit_or_extended",
+      "expectedDurationS": 246
+    },
+    "candidate": {
+      "sourceId": "src_0099",
+      "title": "Tombo Soren - Pale Motion",
+      "durationS": 575,
+      "measuredDurationS": 575
+    },
+    "scenario": "dj_set_rip"
+  },
+  {
+    "track": {
+      "id": "trk_0100",
+      "isrc": "ZZQD22600100",
+      "artist": "Ulva Avery",
+      "title": "Harbor Season - Hartline Remix",
+      "baseTitle": "Harbor Season",
+      "versionText": "Hartline Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 379
+    },
+    "candidate": {
+      "sourceId": "src_0100",
+      "title": "Ulva Avery - Harbor Season (Hartline Remix)",
+      "durationS": 378,
+      "measuredDurationS": 378
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0101",
+      "isrc": "ZZQE22600101",
+      "artist": "Tombo, Juno",
+      "title": "Copper Drive",
+      "baseTitle": "Copper Drive",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 268
+    },
+    "candidate": {
+      "sourceId": "src_0101",
+      "title": "Tombo, Juno - Copper Drive (Extended Mix)",
+      "durationS": 375,
+      "measuredDurationS": 375
+    },
+    "scenario": "extended_for_original"
+  },
+  {
+    "track": {
+      "id": "trk_0102",
+      "isrc": "ZZQD12600102",
+      "artist": "Zonda, Mont",
+      "title": "Copper Garden",
+      "baseTitle": "Copper Garden",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 361
+    },
+    "candidate": {
+      "sourceId": "src_0102",
+      "title": "Zonda, Mont - Copper Garden",
+      "durationS": 362,
+      "measuredDurationS": 362
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0103",
+      "isrc": "ZZQE72600103",
+      "artist": "Brume Ferro",
+      "title": "Pale Frame",
+      "baseTitle": "Pale Frame",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 227
+    },
+    "candidate": {
+      "sourceId": "src_0103",
+      "title": "Brume Ferro - Pale Frame",
+      "durationS": 228,
+      "measuredDurationS": 228
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0104",
+      "isrc": "ZZQE92600104",
+      "artist": "Lumen Hale",
+      "title": "Paper Pulse",
+      "baseTitle": "Paper Pulse",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 308
+    },
+    "candidate": null,
+    "scenario": "missing"
+  },
+  {
+    "track": {
+      "id": "trk_0105",
+      "isrc": "ZZQD92600105",
+      "artist": "Shor, Mont",
+      "title": "Pale Lines",
+      "baseTitle": "Pale Lines",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 314
+    },
+    "candidate": {
+      "sourceId": "src_0105",
+      "title": "Shor, Mont - Pale Lines (Original Mix)",
+      "durationS": 313,
+      "measuredDurationS": 313
+    },
+    "scenario": "original_mix_label"
+  },
+  {
+    "track": {
+      "id": "trk_0106",
+      "isrc": "ZZQB22600106",
+      "artist": "Caldo Kade",
+      "title": "Low Shoreline - Delphi Remix",
+      "baseTitle": "Low Shoreline",
+      "versionText": "Delphi Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 346
+    },
+    "candidate": {
+      "sourceId": "src_0106",
+      "title": "Caldo Kade - Low Shoreline (Delphe Rmx)",
+      "durationS": 345,
+      "measuredDurationS": 345
+    },
+    "scenario": "fuzzy_remixer"
+  },
+  {
+    "track": {
+      "id": "trk_0107",
+      "isrc": "ZZQC92600107",
+      "artist": "Onda Delos",
+      "title": "Tidal Tape",
+      "baseTitle": "Tidal Tape",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 197
+    },
+    "candidate": {
+      "sourceId": "src_0107",
+      "title": "Onda Delos - Tidal Tape",
+      "durationS": 197,
+      "measuredDurationS": 197
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0108",
+      "isrc": "ZZQC72600108",
+      "artist": "Tessel Ines",
+      "title": "Dusty Shoreline",
+      "baseTitle": "Dusty Shoreline",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 279
+    },
+    "candidate": {
+      "sourceId": "src_0108",
+      "title": "Tessel Ines - Dusty Shoreline",
+      "durationS": 664,
+      "measuredDurationS": 664
+    },
+    "scenario": "dj_set_rip"
+  },
+  {
+    "track": {
+      "id": "trk_0109",
+      "isrc": "ZZQD72600109",
+      "artist": "Caldo Hale",
+      "title": "Pale Season - Mondo Bay Remix",
+      "baseTitle": "Pale Season",
+      "versionText": "Mondo Bay Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 292
+    },
+    "candidate": {
+      "sourceId": "src_0109",
+      "title": "Caldo Hale - Pale Season (Mondo Bay Remix)",
+      "durationS": 291,
+      "measuredDurationS": 291
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0110",
+      "isrc": "ZZQE92600110",
+      "artist": "Onda Ines",
+      "title": "Salt Light - Hartline Remix",
+      "baseTitle": "Salt Light",
+      "versionText": "Hartline Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 305
+    },
+    "candidate": null,
+    "scenario": "missing"
+  },
+  {
+    "track": {
+      "id": "trk_0111",
+      "isrc": "ZZQE72600111",
+      "artist": "Plume Kirin",
+      "title": "Warm Season",
+      "baseTitle": "Warm Season",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 241
+    },
+    "candidate": {
+      "sourceId": "src_0111",
+      "title": "Plume Kirin - Warm Season",
+      "durationS": 240,
+      "measuredDurationS": 240
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0112",
+      "isrc": "ZZQB22600112",
+      "artist": "Zonda Mesa",
+      "title": "Slow Drive",
+      "baseTitle": "Slow Drive",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 223
+    },
+    "candidate": {
+      "sourceId": "src_0112",
+      "title": "",
+      "durationS": null,
+      "measuredDurationS": 222
+    },
+    "scenario": "no_provenance"
+  },
+  {
+    "track": {
+      "id": "trk_0113",
+      "isrc": "ZZQD72600113",
+      "artist": "Tombo Lora",
+      "title": "Low Frame",
+      "baseTitle": "Low Frame",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 304
+    },
+    "candidate": {
+      "sourceId": "src_0113",
+      "title": "Tombo Lora - Low Frame (Acappella)",
+      "durationS": 367,
+      "measuredDurationS": 367
+    },
+    "scenario": "acapella"
+  },
+  {
+    "track": {
+      "id": "trk_0114",
+      "isrc": "ZZQD92600114",
+      "artist": "Adrift, Rue",
+      "title": "Neon Light",
+      "baseTitle": "Neon Light",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 298
+    },
+    "candidate": {
+      "sourceId": "src_0114",
+      "title": "Adrift, Rue - Neon Light",
+      "durationS": 299,
+      "measuredDurationS": 299
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0115",
+      "isrc": "ZZQD22600115",
+      "artist": "Serac Ferro",
+      "title": "Iron Light",
+      "baseTitle": "Iron Light",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 208
+    },
+    "candidate": {
+      "sourceId": "src_0115",
+      "title": "Serac Ferro - Iron Light",
+      "durationS": 208,
+      "measuredDurationS": 208
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0116",
+      "isrc": "ZZQE12600116",
+      "artist": "Caldo Avery",
+      "title": "Soft Signal",
+      "baseTitle": "Soft Signal",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 178
+    },
+    "candidate": {
+      "sourceId": "src_0116",
+      "title": "Caldo Avery - Soft Signal",
+      "durationS": 178,
+      "measuredDurationS": 178
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0117",
+      "isrc": "ZZQA12600117",
+      "artist": "Brume Ferro",
+      "title": "Pale Hum",
+      "baseTitle": "Pale Hum",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 355
+    },
+    "candidate": {
+      "sourceId": "src_0117",
+      "title": "Brume Ferro - Pale Hum",
+      "durationS": 354,
+      "measuredDurationS": 354
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0118",
+      "isrc": "ZZQE92600118",
+      "artist": "Lumen Kirin",
+      "title": "Night Hum",
+      "baseTitle": "Night Hum",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 394
+    },
+    "candidate": {
+      "sourceId": "src_0118",
+      "title": "Lumen Kirin - Night Hum",
+      "durationS": 395,
+      "measuredDurationS": 395
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0119",
+      "isrc": "ZZQA22600119",
+      "artist": "Orva, Lora",
+      "title": "Iron Circuit - Dub Mix",
+      "baseTitle": "Iron Circuit",
+      "versionText": "Dub Mix",
+      "versionClass": "edit_or_extended",
+      "expectedDurationS": 225
+    },
+    "candidate": {
+      "sourceId": "src_0119",
+      "title": "Orva, Lora - Iron Circuit (Dub Mix)",
+      "durationS": 225,
+      "measuredDurationS": 225
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0120",
+      "isrc": "ZZQC22600120",
+      "artist": "Plume Lora",
+      "title": "Tidal Pulse - Lune Remix",
+      "baseTitle": "Tidal Pulse",
+      "versionText": "Lune Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 300
+    },
+    "candidate": {
+      "sourceId": "src_0120",
+      "title": "Plume Lora - Tidal Pulse (Lune Remix)",
+      "durationS": 299,
+      "measuredDurationS": 299
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0121",
+      "isrc": "ZZQB22600121",
+      "artist": "Plume Kirin",
+      "title": "Salt Drive",
+      "baseTitle": "Salt Drive",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 173
+    },
+    "candidate": {
+      "sourceId": "src_0121",
+      "title": "Plume Kirin - Salt Drive (Live at Hale Street)",
+      "durationS": 185,
+      "measuredDurationS": 185
+    },
+    "scenario": "live_cut"
+  },
+  {
+    "track": {
+      "id": "trk_0122",
+      "isrc": "ZZQD12600122",
+      "artist": "Niva Hale",
+      "title": "Static Hours",
+      "baseTitle": "Static Hours",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 208
+    },
+    "candidate": {
+      "sourceId": "src_0122",
+      "title": "Niva Hale - Static Hours",
+      "durationS": 388,
+      "measuredDurationS": 388
+    },
+    "scenario": "dj_set_rip"
+  },
+  {
+    "track": {
+      "id": "trk_0123",
+      "isrc": "ZZQC12600123",
+      "artist": "Brume Lis",
+      "title": "Glass Rooms",
+      "baseTitle": "Glass Rooms",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 347
+    },
+    "candidate": {
+      "sourceId": "src_0123",
+      "title": "Brume Lis - Glass Rooms",
+      "durationS": 348,
+      "measuredDurationS": 348
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0124",
+      "isrc": "ZZQB12600124",
+      "artist": "Onda Hale",
+      "title": "Night Weather - Lune Remix",
+      "baseTitle": "Night Weather",
+      "versionText": "Lune Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 400
+    },
+    "candidate": {
+      "sourceId": "src_0124",
+      "title": "Onda Hale - Night Weather (Lune Remix)",
+      "durationS": 400,
+      "measuredDurationS": 400
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0125",
+      "isrc": "ZZQE92600125",
+      "artist": "Sable Avery",
+      "title": "Neon Hum",
+      "baseTitle": "Neon Hum",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 214
+    },
+    "candidate": {
+      "sourceId": "src_0125",
+      "title": "Sable Avery - Neon Hum",
+      "durationS": 483,
+      "measuredDurationS": 483
+    },
+    "scenario": "dj_set_rip"
+  },
+  {
+    "track": {
+      "id": "trk_0126",
+      "isrc": "ZZQD12600126",
+      "artist": "Kestrel Toma",
+      "title": "Low Echo",
+      "baseTitle": "Low Echo",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 322
+    },
+    "candidate": {
+      "sourceId": "src_0126",
+      "title": "Kestrel Toma - Low Echo (Acappella)",
+      "durationS": 364,
+      "measuredDurationS": 364
+    },
+    "scenario": "acapella"
+  },
+  {
+    "track": {
+      "id": "trk_0127",
+      "isrc": "ZZQA22600127",
+      "artist": "Shor Toma",
+      "title": "Hollow Tape",
+      "baseTitle": "Hollow Tape",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 329
+    },
+    "candidate": {
+      "sourceId": "src_0127",
+      "title": "Shor Toma - Hollow Tape",
+      "durationS": 192,
+      "measuredDurationS": 192
+    },
+    "scenario": "snippet"
+  },
+  {
+    "track": {
+      "id": "trk_0128",
+      "isrc": "ZZQC22600128",
+      "artist": "Kolm Zeru",
+      "title": "Harbor Water",
+      "baseTitle": "Harbor Water",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 191
+    },
+    "candidate": {
+      "sourceId": "src_0128",
+      "title": "Kolm Zeru - Harbor Water (Extended Mix)",
+      "durationS": 278,
+      "measuredDurationS": 278
+    },
+    "scenario": "extended_for_original"
+  },
+  {
+    "track": {
+      "id": "trk_0129",
+      "isrc": "ZZQA92600129",
+      "artist": "Tessel Soren",
+      "title": "Night Rooms",
+      "baseTitle": "Night Rooms",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 230
+    },
+    "candidate": {
+      "sourceId": "src_0129",
+      "title": "",
+      "durationS": null,
+      "measuredDurationS": 231
+    },
+    "scenario": "no_provenance"
+  },
+  {
+    "track": {
+      "id": "trk_0130",
+      "isrc": "ZZQE92600130",
+      "artist": "Onda, Lis",
+      "title": "Iron Season",
+      "baseTitle": "Iron Season",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 349
+    },
+    "candidate": {
+      "sourceId": "src_0130",
+      "title": "Onda, Lis - Iron Season",
+      "durationS": 349,
+      "measuredDurationS": 349
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0131",
+      "isrc": "ZZQE72600131",
+      "artist": "Sable Kirin",
+      "title": "Paper Hum",
+      "baseTitle": "Paper Hum",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 309
+    },
+    "candidate": {
+      "sourceId": "src_0131",
+      "title": "Sable Kirin - Paper Hum",
+      "durationS": 310,
+      "measuredDurationS": 310
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0132",
+      "isrc": "ZZQA92600132",
+      "artist": "Varda Ines",
+      "title": "Amber Lines",
+      "baseTitle": "Amber Lines",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 264
+    },
+    "candidate": {
+      "sourceId": "src_0132",
+      "title": "Varda Ines - Amber Lines (Original Mix)",
+      "durationS": 264,
+      "measuredDurationS": 264
+    },
+    "scenario": "original_mix_label"
+  },
+  {
+    "track": {
+      "id": "trk_0133",
+      "isrc": "ZZQB22600133",
+      "artist": "Zonda Avery",
+      "title": "Wild Rooms - Cassio Remix",
+      "baseTitle": "Wild Rooms",
+      "versionText": "Cassio Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 256
+    },
+    "candidate": {
+      "sourceId": "src_0133",
+      "title": "Zonda Avery - Wild Rooms (Cassio Remix)",
+      "durationS": 256,
+      "measuredDurationS": 256
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0134",
+      "isrc": "ZZQD72600134",
+      "artist": "Kolm Juno",
+      "title": "Slow Tape",
+      "baseTitle": "Slow Tape",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 278
+    },
+    "candidate": {
+      "sourceId": "src_0134",
+      "title": "Kolm Juno - Slow Tape",
+      "durationS": 526,
+      "measuredDurationS": 526
+    },
+    "scenario": "dj_set_rip"
+  },
+  {
+    "track": {
+      "id": "trk_0135",
+      "isrc": "ZZQC22600135",
+      "artist": "Halden Mesa",
+      "title": "Glass Current",
+      "baseTitle": "Glass Current",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 204
+    },
+    "candidate": {
+      "sourceId": "src_0135",
+      "title": "Halden Mesa - Glass Current",
+      "durationS": 133,
+      "measuredDurationS": 133
+    },
+    "scenario": "snippet"
+  },
+  {
+    "track": {
+      "id": "trk_0136",
+      "isrc": "ZZQA92600136",
+      "artist": "Caldo Toma",
+      "title": "Tidal Rooms - Radio Edit",
+      "baseTitle": "Tidal Rooms",
+      "versionText": "Radio Edit",
+      "versionClass": "edit_or_extended",
+      "expectedDurationS": 354
+    },
+    "candidate": {
+      "sourceId": "src_0136",
+      "title": "",
+      "durationS": null,
+      "measuredDurationS": 355
+    },
+    "scenario": "no_provenance"
+  },
+  {
+    "track": {
+      "id": "trk_0137",
+      "isrc": "ZZQB22600137",
+      "artist": "Orva Kade",
+      "title": "Harbor Tape - Oskar Vane Remix",
+      "baseTitle": "Harbor Tape",
+      "versionText": "Oskar Vane Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 323
+    },
+    "candidate": {
+      "sourceId": "src_0137",
+      "title": "Orva Kade - Harbor Tape (Oskar Vane Remix)",
+      "durationS": 323,
+      "measuredDurationS": 323
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0138",
+      "isrc": "ZZQA72600138",
+      "artist": "Onda Ferro",
+      "title": "Tidal Drive",
+      "baseTitle": "Tidal Drive",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 173
+    },
+    "candidate": {
+      "sourceId": "src_0138",
+      "title": "Onda Ferro - Tidal Drive",
+      "durationS": 173,
+      "measuredDurationS": 173
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0139",
+      "isrc": "ZZQC12600139",
+      "artist": "Lumen Kade",
+      "title": "Hollow Circuit - Hartline Remix",
+      "baseTitle": "Hollow Circuit",
+      "versionText": "Hartline Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 402
+    },
+    "candidate": {
+      "sourceId": "src_0139",
+      "title": "Lumen Kade - Hollow Circuit (Hartline Remix)",
+      "durationS": 401,
+      "measuredDurationS": 401
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0140",
+      "isrc": "ZZQD22600140",
+      "artist": "Lumen Lora",
+      "title": "Drift Tape",
+      "baseTitle": "Drift Tape",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 220
+    },
+    "candidate": {
+      "sourceId": "src_0140",
+      "title": "Lumen Lora - Drift Tape",
+      "durationS": 221,
+      "measuredDurationS": 221
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0141",
+      "isrc": "ZZQC22600141",
+      "artist": "Ulva Ines",
+      "title": "Wild Season",
+      "baseTitle": "Wild Season",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 306
+    },
+    "candidate": {
+      "sourceId": "src_0141",
+      "title": "Ulva Ines - Wild Season",
+      "durationS": 305,
+      "measuredDurationS": 305
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0142",
+      "isrc": "ZZQE92600142",
+      "artist": "Varda, Toma",
+      "title": "Paper Tape - Ferris Tate Remix",
+      "baseTitle": "Paper Tape",
+      "versionText": "Ferris Tate Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 399
+    },
+    "candidate": {
+      "sourceId": "src_0142",
+      "title": "Varda, Toma - Paper Tape (Ferris Tate Rmx)",
+      "durationS": 398,
+      "measuredDurationS": 398
+    },
+    "scenario": "fuzzy_remixer"
+  },
+  {
+    "track": {
+      "id": "trk_0143",
+      "isrc": "ZZQA12600143",
+      "artist": "Ulva Delos",
+      "title": "Warm Garden",
+      "baseTitle": "Warm Garden",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 253
+    },
+    "candidate": {
+      "sourceId": "src_0143",
+      "title": "Ulva Delos - Warm Garden",
+      "durationS": 168,
+      "measuredDurationS": 168
+    },
+    "scenario": "snippet"
+  },
+  {
+    "track": {
+      "id": "trk_0144",
+      "isrc": "ZZQC12600144",
+      "artist": "Orva Juno",
+      "title": "Night Hours",
+      "baseTitle": "Night Hours",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 197
+    },
+    "candidate": {
+      "sourceId": "src_0144",
+      "title": "Orva Juno - Night Hours (Original Mix)",
+      "durationS": 198,
+      "measuredDurationS": 198
+    },
+    "scenario": "original_mix_label"
+  },
+  {
+    "track": {
+      "id": "trk_0145",
+      "isrc": "ZZQB72600145",
+      "artist": "Sable Lora",
+      "title": "Paper Water - Extended Mix",
+      "baseTitle": "Paper Water",
+      "versionText": "Extended Mix",
+      "versionClass": "edit_or_extended",
+      "expectedDurationS": 342
+    },
+    "candidate": {
+      "sourceId": "src_0145",
+      "title": "Sable Lora - Paper Water (Extended Mix)",
+      "durationS": 343,
+      "measuredDurationS": 343
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0146",
+      "isrc": "ZZQE92600146",
+      "artist": "Pell Rue",
+      "title": "Glass Echo",
+      "baseTitle": "Glass Echo",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 349
+    },
+    "candidate": {
+      "sourceId": "src_0146",
+      "title": "Pell Rue - Glass Echo",
+      "durationS": 348,
+      "measuredDurationS": 348
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0147",
+      "isrc": "ZZQA22600147",
+      "artist": "Tombo Mont",
+      "title": "Iron Mornings",
+      "baseTitle": "Iron Mornings",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 402
+    },
+    "candidate": {
+      "sourceId": "src_0147",
+      "title": "Tombo Mont - Iron Mornings",
+      "durationS": 401,
+      "measuredDurationS": 401
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0148",
+      "isrc": "ZZQB12600148",
+      "artist": "Sable, Kirin",
+      "title": "Tidal Current - Ferris Tate Remix",
+      "baseTitle": "Tidal Current",
+      "versionText": "Ferris Tate Remix",
+      "versionClass": "distinct_remix",
+      "expectedDurationS": 402
+    },
+    "candidate": {
+      "sourceId": "src_0148",
+      "title": "Sable, Kirin - Tidal Current (Ferris Tate Remix)",
+      "durationS": 402,
+      "measuredDurationS": 402
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0149",
+      "isrc": "ZZQE72600149",
+      "artist": "Serac Soren",
+      "title": "Open Season - Radio Edit",
+      "baseTitle": "Open Season",
+      "versionText": "Radio Edit",
+      "versionClass": "edit_or_extended",
+      "expectedDurationS": 231
+    },
+    "candidate": {
+      "sourceId": "src_0149",
+      "title": "Serac Soren - Open Season",
+      "durationS": 447,
+      "measuredDurationS": 447
+    },
+    "scenario": "dj_set_rip"
+  },
+  {
+    "track": {
+      "id": "trk_0150",
+      "isrc": "ZZQB92600150",
+      "artist": "Vayle Kade",
+      "title": "Open Water",
+      "baseTitle": "Open Water",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 340
+    },
+    "candidate": null,
+    "scenario": "missing"
+  },
+  {
+    "track": {
+      "id": "trk_0151",
+      "isrc": "ZZQC72600151",
+      "artist": "Serac Hale",
+      "title": "Open Water - Dub Mix",
+      "baseTitle": "Open Water",
+      "versionText": "Dub Mix",
+      "versionClass": "edit_or_extended",
+      "expectedDurationS": 244
+    },
+    "candidate": {
+      "sourceId": "src_0151",
+      "title": "Serac Hale - Open Water (Dub Mix)",
+      "durationS": 245,
+      "measuredDurationS": 245
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0152",
+      "isrc": "ZZQB12600152",
+      "artist": "Sable Delos",
+      "title": "Amber Motion",
+      "baseTitle": "Amber Motion",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 172
+    },
+    "candidate": {
+      "sourceId": "src_0152",
+      "title": "Sable Delos - Amber Motion",
+      "durationS": 171,
+      "measuredDurationS": 171
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0153",
+      "isrc": "ZZQB92600153",
+      "artist": "Onda Hale",
+      "title": "Drift Weather",
+      "baseTitle": "Drift Weather",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 349
+    },
+    "candidate": {
+      "sourceId": "src_0153",
+      "title": "Onda Hale - Drift Weather",
+      "durationS": 350,
+      "measuredDurationS": 350
+    },
+    "scenario": "clean"
+  },
+  {
+    "track": {
+      "id": "trk_0154",
+      "isrc": "ZZQD22600154",
+      "artist": "Serac Avery",
+      "title": "Soft Current",
+      "baseTitle": "Soft Current",
+      "versionText": "",
+      "versionClass": "original",
+      "expectedDurationS": 305
+    },
+    "candidate": {
+      "sourceId": "src_0154",
+      "title": "Serac Avery - Soft Current (Original Mix)",
+      "durationS": 306,
+      "measuredDurationS": 306
+    },
+    "scenario": "original_mix_label"
+  }
+]
