@@ -2,7 +2,7 @@
 
 **A validation engine for automated media pipelines — because the system that fetches your files also writes their metadata.**
 
-[**Live demo →**](https://crate-check.vercel.app) · [How it decides](#what-it-actually-checks) · [What it caught](#what-it-caught)
+[**Live demo →**](https://crate-check-delta.vercel.app) · [How it decides](#what-it-actually-checks) · [What it caught](#what-it-caught)
 
 ---
 
