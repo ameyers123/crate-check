@@ -2,6 +2,7 @@ import libraryData from "@/lib/library/library.json";
 import incomingData from "@/lib/library/incoming.json";
 import type { Track } from "@/lib/library/types";
 import Workflow from "./tool/workflow";
+import Listen from "./tool/listen";
 import Analyze from "./tool/analyze";
 import PrepAndPlay from "./tool/prep-and-play";
 import AuditView from "./tool/audit";
@@ -17,6 +18,7 @@ export default function Home() {
       <Find />
       <Collect />
       <AuditView library={incoming} />
+      <Listen />
       <Analyze library={library} />
       <PrepAndPlay library={library} />
       <Export />

@@ -4,10 +4,11 @@ export const STEPS = [
   { id: "find", n: 1, name: "Find", sub: "Decide what to look for", tool: false },
   { id: "collect", n: 2, name: "Collect", sub: "Get the files", tool: false },
   { id: "check", n: 3, name: "Check", sub: "Are they what they claim?", tool: true },
-  { id: "analyze", n: 4, name: "Analyze & tag", sub: "Read the audio, label it", tool: true },
-  { id: "plan", n: 5, name: "Plan", sub: "Shape the set beforehand", tool: true },
-  { id: "live", n: 6, name: "Play live", sub: "Decide what goes next", tool: true },
-  { id: "export", n: 7, name: "Export", sub: "Back into Rekordbox", tool: true },
+  { id: "listen", n: 4, name: "Analyze", sub: "Measure the audio itself", tool: true },
+  { id: "analyze", n: 5, name: "Tag", sub: "Turn numbers into words", tool: true },
+  { id: "plan", n: 6, name: "Plan", sub: "Shape the set beforehand", tool: true },
+  { id: "live", n: 7, name: "Play live", sub: "Decide what goes next", tool: true },
+  { id: "export", n: 8, name: "Export", sub: "Back into Rekordbox", tool: true },
 ] as const;
 
 export default function Workflow() {
@@ -52,7 +53,7 @@ export default function Workflow() {
         </ol>
 
         <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-muted">
-          Steps 3 to 7 are normally split across Rekordbox, Lexicon, Mixed In Key and a
+          Steps 3 to 8 are normally split across Rekordbox, Lexicon, Mixed In Key and a
           spreadsheet. This does them in one place and hands the result back to Rekordbox,
           so you keep organising and playing where you already do.
         </p>

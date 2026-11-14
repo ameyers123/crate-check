@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { generateLibrary } from "../lib/library/generate";
 import { computeThresholds, tagTrack, tagLibrary, hasTag } from "../lib/library/tagger";
 import { auditLibrary } from "../lib/library/audit";
+import { analyzeAudio, estimateTempo, fft } from "../lib/library/analyze-audio";
 import type { Features, Track } from "../lib/library/types";
 import { REFERENCE_THRESHOLDS, REFERENCE_CORPUS_SIZE } from "../lib/library/reference";
 
@@ -394,5 +395,92 @@ describe("threshold stability", () => {
     const fromCatalog = computeThresholds(catalog);
     expect(REFERENCE_THRESHOLDS).not.toEqual(fromCatalog);
     expect(REFERENCE_CORPUS_SIZE).toBeGreaterThan(1000);
+  });
+});
+
+describe("audio analysis", () => {
+  const SR = 44100;
+
+  /** A kick-like thump every beat, which is all a tempo estimator needs. */
+  const clickTrack = (bpm: number, seconds = 6) => {
+    const x = new Float32Array(SR * seconds);
+    const beat = 60 / bpm;
+    for (let b = 0; b * beat < seconds; b++) {
+      const start = Math.floor(b * beat * SR);
+      for (let i = 0; i < SR * 0.12 && start + i < x.length; i++) {
+        const t = i / SR;
+        x[start + i] += Math.sin(2 * Math.PI * (140 * Math.exp(-t * 36) + 50) * t) * Math.exp(-t * 26);
+      }
+    }
+    return x;
+  };
+
+  const sine = (hz: number, seconds = 6) => {
+    const x = new Float32Array(SR * seconds);
+    for (let i = 0; i < x.length; i++) x[i] = Math.sin((2 * Math.PI * hz * i) / SR) * 0.6;
+    return x;
+  };
+
+  const noise = (seconds = 6) => {
+    const x = new Float32Array(SR * seconds);
+    let seed = 12345;
+    for (let i = 0; i < x.length; i++) {
+      seed = (seed * 1103515245 + 12345) & 0x7fffffff;
+      x[i] = (seed / 0x7fffffff) * 2 - 1;
+    }
+    return x;
+  };
+
+  it("fft round-trips a known single-bin signal", () => {
+    const n = 64;
+    const re = new Float64Array(n);
+    const im = new Float64Array(n);
+    for (let i = 0; i < n; i++) re[i] = Math.cos((2 * Math.PI * 4 * i) / n);
+    fft(re, im);
+    const mags = Array.from({ length: n / 2 }, (_, i) => Math.hypot(re[i], im[i]));
+    expect(mags.indexOf(Math.max(...mags))).toBe(4);
+  });
+
+  it("rejects an fft length that is not a power of two", () => {
+    expect(() => fft(new Float64Array(10), new Float64Array(10))).toThrow(/power of two/);
+  });
+
+  it("recovers the tempo of a click track to within 1 BPM", () => {
+    for (const bpm of [100, 124, 140]) {
+      const est = estimateTempo(clickTrack(bpm), SR);
+      expect(est.bpm, `${bpm} BPM`).not.toBeNull();
+      expect(Math.abs(est.bpm! - bpm), `${bpm} BPM, got ${est.bpm}`).toBeLessThanOrEqual(1);
+    }
+  });
+
+  it("reports no tempo for material with no transients", () => {
+    // A steady tone autocorrelates with itself beautifully and still has no
+    // beat. Reporting a number here would be worse than reporting nothing.
+    expect(estimateTempo(sine(110), SR).bpm).toBeNull();
+  });
+
+  it("separates noise from music on centroid and zero crossings", () => {
+    const n = analyzeAudio(noise(), SR);
+    const m = analyzeAudio(clickTrack(124), SR);
+    expect(n.centroid).toBeGreaterThan(m.centroid * 4);
+    expect(n.zcr).toBeGreaterThan(m.zcr * 4);
+    expect(n.verdict.broken).toBe(true);
+    expect(m.verdict.broken).toBe(false);
+  });
+
+  it("does not call quiet or beatless music broken", () => {
+    expect(analyzeAudio(sine(110), SR).verdict.broken).toBe(false);
+  });
+
+  it("a noise file of a plausible length passes every metadata check", () => {
+    // The point of the audio stage: the cheap checks cannot see this at all.
+    const track: Track = {
+      id: "noise-1",
+      artist: "Someone",
+      title: "A Record (Extended Mix)",
+      features: { ...features(), durationS: 395 },
+    };
+    expect(auditLibrary([track])).toHaveLength(0);
+    expect(analyzeAudio(noise(), SR).verdict.broken).toBe(true);
   });
 });

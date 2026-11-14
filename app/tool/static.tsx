@@ -120,7 +120,7 @@ export function Collect() {
 export function Export() {
   return (
     <Section
-      n={6}
+      n={8}
       id="export"
       kicker="Export"
       title="Hand it back to Rekordbox"

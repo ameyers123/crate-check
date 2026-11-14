@@ -72,8 +72,8 @@ export default function Analyze({ library }: { library: Track[] }) {
 
   return (
     <Section
-      n={4}
-      kicker="Analyze & tag"
+      n={5}
+      kicker="Tag"
       id="analyze"
       title="A file goes in. Something searchable comes out."
       lede="An audio file by itself is a filename and a waveform. The analyzer reads it and returns numbers; the tagger turns those numbers into words you'd actually type into a search box. Every tag shows the rule that produced it, so you can disagree with it."

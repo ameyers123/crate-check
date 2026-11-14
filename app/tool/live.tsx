@@ -157,7 +157,7 @@ export default function Live({
 
   return (
     <Section
-      n={6}
+      n={7}
       id="live"
       kicker="Play live"
       title="In the booth, you have about two minutes to decide"
