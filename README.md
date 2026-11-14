@@ -18,18 +18,31 @@ Rekordbox manages your library and plays it. Lexicon cleans up metadata. Mixed I
 
 BPM and key are measurable, so everyone has them. Feel isn't, so nobody does.
 
-## Where it fits
+## The whole pipeline, and what happens when you skip a step
 
-| | step | who |
-|---|---|---|
-| 1 | **Find** — decide what to look for | you |
-| 2 | **Collect** — get the files | you |
-| 3 | **Check** — are they what they claim? | crate-check |
-| 4 | **Analyze** — measure the audio itself | crate-check |
-| 5 | **Tag** — turn the numbers into words | crate-check |
-| 6 | **Plan** — shape the set beforehand | crate-check |
-| 7 | **Play live** — decide what goes next | crate-check |
-| 8 | **Export** — back into Rekordbox | crate-check |
+Getting a record from "I heard this" to mixing it on a CDJ takes eleven steps. They aren't equally important, and the honest version of this table labels this project's own headline feature optional.
+
+| | step | level | who does it | this tool |
+|---|---|---|---|---|
+| 1 | **Find** — decide what you want | optional | you | — |
+| 2 | **Collect** — get the files | required | you | — |
+| 3 | **Check** — is each file what it claims? | recommended | crate-check | does it |
+| 4 | **Analyze** — measure the audio | required | Rekordbox · Mixed In Key · Essentia | helps |
+| 5 | **Tag** — turn numbers into words | **optional** | crate-check | does it |
+| 6 | **Beatgrid** — check where the beats fall | required | Rekordbox, then you | — |
+| 7 | **Cue points** — mark where things happen | recommended | Rekordbox · Mixed In Key | — |
+| 8 | **Plan** — shape the set | optional | crate-check | does it |
+| 9 | **Export** — put it on the USB | required | Rekordbox | — |
+| 10 | **Load & find** — pick what goes next | required | you, on the CDJ | helps |
+| 11 | **Transition** — mix it in | required | you | helps |
+
+The page opens on this as an interactive map. Click a step to see what it involves; **skip it to see what breaks further down.** Every step declares which later steps it damages and how badly:
+
+- **can't happen** — skip Export and the tracks aren't on the stick; Load & find and the Transition never happen
+- **goes wrong** — skip the Beatgrid and sync holds for a few bars, then drifts; by bar 32 the kicks are flamming in front of people
+- **slower, riskier** — skip Tagging and you find the next record by filename, defaulting to the forty you can remember
+
+Blocked steps cascade, because a step that can't happen can't do its own job either. Presets show the common cases — *rushed before a gig*, *only what's required*, *forgot to export* — and a line at the bottom says where you end up.
 
 ## The tag vocabulary
 
@@ -63,16 +76,18 @@ The original worry was real — a fixed 0.7 would tag everything in a techno lib
 
 A set has a job, and the job decides the curve.
 
-| shape | curve | job |
-|---|---|---|
-| **Classic arc** | 3→4→6→7→8→9→9→7→5 | a full night of your own, one peak |
-| **Opening set** | 3→4→4→4→5→6→6 | warm the room, never peak, hand over with somewhere left to go |
-| **Peak-time** | 8→9→9→10→9→9→9 | the room is already moving, start where the last DJ left off |
-| **Closing / after-hours** | 7→6→5→5→4→4→3 | take a tired room down, longer blends, fewer vocals |
-| **Sunset** | 4→4→6→6→6→5 | warm and groovy, mid-tempo, nothing aggressive |
-| **Festival slot** | 7→8→9→10→9 | short, daylight, land something recognisable early |
+| shape | energy | BPM | key-compatible transitions | job |
+|---|---|---|---|---|
+| **Classic arc** | 3→4→6→6→8→9→9→7→5 | 118–130 | 6 of 8 | a full night of your own, one peak |
+| **Opening set** | 3→4→4→4→6→6→6 | 116–126 | 4 of 6 | warm the room, never peak, hand over with somewhere left to go |
+| **Peak-time** | 8→9→10→10→10→9→9 | 124–130 | 4 of 6 | the room is already moving, start where the last DJ left off |
+| **Closing / after-hours** | 7→6→4→5→4→4→4 | 116–126 | 4 of 6 | take a tired room down, longer blends, fewer vocals |
+| **Sunset** | 4→4→6→6→6→4 | 116–126 | 5 of 5 | warm and groovy, mid-tempo, nothing aggressive |
+| **Festival slot** | 7→8→9→10→10 | 124–130 | 2 of 4 | short, daylight, land something recognisable early |
 
-Those curves are what the planner actually produced from the demo catalog, not targets it missed.
+Those are what the planner actually produced from the demo catalog, not targets.
+
+The planner scores three things. **Energy** against the curve does most of the work. **Key** against the previous slot comes second — consecutive slots get mixed into each other, so a set that clashes on every transition isn't a plan. **Tempo** is a band per shape plus a graduated penalty for jumps. Both of the last two were added after the transition view exposed the planner ignoring them: it had been building after-hours sets out of 85 BPM pop records because they were calm, and opening sets with a 29% tempo jump between the first two tracks.
 
 ## Playing live
 
@@ -89,6 +104,41 @@ The track playing sets four constraints, and every other record can be ranked ag
 Each suggestion shows all four verdicts with the actual numbers, so you can overrule it — a clashing key doesn't matter if you're cutting rather than blending.
 
 **And when it goes wrong,** three buttons for the three things that actually happen: *floor is emptying* (Floor Savers and Resets you can mix into from here), *key is clashing* (Bridge/Tool tracks that sit under anything), *need a tempo change* (tracks that open beatless or in a different rhythmic feel). Each is filtered to what's playable from the current record — that's the difference between this and a static "bangers" folder.
+
+## Beatgrid and cue points
+
+The two steps every DJ does and that are easy to treat as housekeeping.
+
+**The beatgrid** is analysis's guess at where every beat and bar falls. Sync, quantize, loops, beat-jump and every cue point snap to it. On programmed dance records the guess is right. On anything played by people — older disco, live drums, swung grooves — the real kick drifts away from a constant-tempo grid. The demo shows it on a live-played 1970s record: a chart of the grid error climbing bar by bar, and close-ups of bar 1 (kicks on the grid) against bar 32 (every kick 0.6 beats late, about 360 ms). Correct the grid and the error goes to zero; switch to a programmed record and there was never anything to fix.
+
+The record sounds fine on its own. It only goes wrong when something trusts the grid — which is why skipping this step quietly breaks steps further down that look unrelated to it.
+
+**Cue points** are saved positions mapped to pads on the CDJ: mix in, groove starts, breakdown, drop, and an 8-bar loop at the start of the outro that holds the record for as long as the next mix takes. Shown on a waveform coloured by section. The arrangements are illustrative — the analysis pass didn't extract song structure — but laid out the way dance records are: in multiples of 8 bars, intro and outro sized for mixing.
+
+## The transition
+
+The last mile, and the reason for everything above it.
+
+Matching the beats is the easy part; sync does it. The decision that's audible is *when you start the incoming record*. Dance music is built in 32-bar phrases, and a mix sounds like one piece of music only if both records change at the same moments. The demo puts the outgoing and incoming records on two decks with their phrase lines drawn, and lets you drag the incoming start point: **on the phrase**, **half-phrase**, or **off the phrase** — technically matched, musically wrong.
+
+It also gets a detail right that's easy to get wrong: a record with an 8-bar intro has its first phrase *after* the intro, so you press play 8 bars **before** the boundary. Starting it exactly on the boundary puts it off the phrase. Around that: the overlap in bars and seconds, where the bass swap lands, the pitch change needed to match tempo, the key relationship, and what your hands actually do at each point.
+
+The pair comes from the set you planned upstream, opening on the pair from that set that mixes most cleanly.
+
+## The other tools in this picture
+
+Several tools each own a piece of this, connected by the file itself: each reads what the last wrote into its tags and adds its own.
+
+| tool | what it's for | produces |
+|---|---|---|
+| **Rekordbox** (analysis) | measures tempo and key on import, places the beatgrid, draws the waveform | BPM, key, grid, waveform |
+| **Mixed In Key** | dedicated key detection in Camelot notation, an energy score, cue points | key, energy, cues — written to tags |
+| **Essentia** | open-source audio analysis from the Music Technology Group at Universitat Pompeu Fabra; pretrained models return probabilities for genre styles, mood, vocals | numbers, not labels |
+| **crate-check** | turns those numbers into a vocabulary, checks files, plans sets, ranks what can follow | tags in standard metadata fields |
+| **Rekordbox** (library) | where the library lives — playlists, grids, cues — and what exports to USB | everything the CDJ needs |
+| **Lexicon** | keeps libraries in sync between DJ apps; bulk tag edits, duplicates, cleanup | a tidier, mirrored library |
+
+**Where this overlaps, honestly:** Mixed In Key also gives an energy score, and Lexicon also edits tags. crate-check replaces neither — trust a dedicated key detector for key, and use Lexicon to keep libraries in sync. It doesn't fix beatgrids, set cues, export to USB, play audio or download anything. What none of the others do is describe how a record feels or where it belongs in a night.
 
 ## Checking files
 
@@ -118,13 +168,13 @@ Grouping  Warm-up
 Genre     Deep House
 ```
 
-Because they live in the file, they're on the USB in the booth — not in an app on a laptop at home. Typing "Peak" on a CDJ and getting the tracks that work there beats scrolling filenames under pressure.
+Because they live in the file, they travel with it. The reliable route from a tag to the booth is a playlist: build "Peak", "Warm-up" and "Floor Savers" playlists in Rekordbox from the tags before you export, and on the CDJ they're folders you open rather than searches you hope will work.
 
 ## Running it
 
 ```bash
 npm install
-npm test      # 50 tests: tagging, Camelot maths, set shapes, audit checks, DSP
+npm test      # 95 tests: tagging, Camelot maths, set shapes, audit, DSP, pipeline, phrasing
 npm run generate # rebuild demo data, print tag coverage and every set shape's curve
 npm run dev   # the tool, at localhost:3000
 ```
@@ -138,9 +188,12 @@ lib/library/
   reference.ts       the frozen cutoffs, generated from the full corpus
   tagger.ts          overlapping tags, energy, role tags
   mixing.ts          Camelot wheel, the four signals, emergency filtering
-  setshapes.ts       the six shapes and the planner
+  setshapes.ts       the six shapes and the planner (energy, key, tempo band)
+  phrasing.ts        bars, phrases, arrangement, cue points, transition maths
   audit.ts           self-contained file checks
   catalog.ts         the 62-track demo catalog
+lib/pipeline/
+  steps.ts           the eleven steps, what each damages if skipped, and the cascade
 app/tool/            the interface — same modules, running in the browser
 ```
 

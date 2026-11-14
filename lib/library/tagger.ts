@@ -191,7 +191,7 @@ function functionTags(f: Features, th: Thresholds): Tag[] {
  * directly. It's a blend of how hard a record hits (aggressive), how much it
  * asks the floor to move (party, danceability) and how fast it is.
  */
-export function energyOf(f: Features, th: Thresholds): { energy: number; trace: string } {
+export function energyOf(f: Features): { energy: number; trace: string } {
   const m = f.mood;
   const bpmPart = Math.max(0, Math.min(1, (f.bpm - 100) / 40));
   const raw =
@@ -231,7 +231,7 @@ function roleTags(f: Features, energy: number, fnTags: Tag[]): Tag[] {
 
 export function tagTrack(track: Track, th: Thresholds): TaggedTrack {
   const fnTags = functionTags(track.features, th);
-  const { energy, trace } = energyOf(track.features, th);
+  const { energy, trace } = energyOf(track.features);
   return {
     ...track,
     energy,

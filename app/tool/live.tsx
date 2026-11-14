@@ -157,9 +157,9 @@ export default function Live({
 
   return (
     <Section
-      n={7}
+      n={10}
       id="live"
-      kicker="Play live"
+      kicker="Load & find"
       title="In the booth, you have about two minutes to decide"
       lede="This is where the tags pay for themselves. The track playing sets four constraints — key, tempo, energy and how much runway the next record gives you — and the library can be ranked against all four at once instead of you remembering."
     >

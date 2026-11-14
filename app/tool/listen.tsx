@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { analyzeAudio } from "@/lib/library/analyze-audio";
 import type { AudioAnalysis } from "@/lib/library/analyze-audio";
 import { Section } from "../sections/ui";
@@ -62,13 +62,16 @@ export default function Listen() {
   const clip = CLIPS[idx];
 
   // Switching clips invalidates the reading, and leaving the old one on screen
-  // next to a new filename would be a lie.
-  useEffect(() => {
+  // next to a new filename would be a lie. Reset here, in the event that
+  // causes it, rather than in an effect that runs a render later.
+  const selectClip = (i: number) => {
+    if (i === idx) return;
+    setIdx(i);
     setResult(null);
     setError(null);
     audioRef.current?.pause();
     setPlaying(false);
-  }, [idx]);
+  };
 
   const run = useCallback(async () => {
     setBusy(true);
@@ -116,7 +119,7 @@ export default function Listen() {
         {CLIPS.map((c, i) => (
           <button
             key={c.file}
-            onClick={() => setIdx(i)}
+            onClick={() => selectClip(i)}
             className={`rounded-lg border px-3 py-1.5 text-left text-[13px] transition-colors ${
               i === idx ? "border-foreground/40 bg-panel2" : "border-edge text-muted hover:text-foreground"
             }`}

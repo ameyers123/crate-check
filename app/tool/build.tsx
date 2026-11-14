@@ -63,7 +63,7 @@ export default function Build({
 
   return (
     <Section
-      n={6}
+      n={8}
       id="plan"
       kicker="Plan"
       title="A set has a shape, and the shape depends on the job"

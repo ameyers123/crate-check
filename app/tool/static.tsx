@@ -120,7 +120,7 @@ export function Collect() {
 export function Export() {
   return (
     <Section
-      n={8}
+      n={9}
       id="export"
       kicker="Export"
       title="Hand it back to Rekordbox"
@@ -149,10 +149,11 @@ export function Export() {
         <div className="rounded-xl border border-edge bg-panel/60 p-5">
           <h3 className="text-[14px] font-medium">Why it matters on the CDJ</h3>
           <p className="mt-2 text-[13px] leading-relaxed text-muted">
-            Searching a USB mid-set is slow and you are doing it under pressure. Typing
-            &ldquo;Peak&rdquo; and getting the 19 tracks that actually work there is a
-            different experience from scrolling 3,000 filenames trying to remember which one
-            you meant.
+            Finding a record on a USB mid-set is slow and you&rsquo;re doing it under
+            pressure. The reliable route from a tag to the booth is a playlist: build
+            &ldquo;Peak&rdquo;, &ldquo;Warm-up&rdquo; and &ldquo;Floor Savers&rdquo; playlists
+            in Rekordbox from the tags before you export, and on the CDJ they&rsquo;re folders
+            you open rather than searches you hope will work.
           </p>
           <p className="mt-3 text-[13px] leading-relaxed text-muted">
             It also survives the trip: because the tags live in the file, they&rsquo;re on
