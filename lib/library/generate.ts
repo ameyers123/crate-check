@@ -53,13 +53,13 @@ function weightedPick<T>(r: () => number, ws: [T, number][]): T {
 /** BPM centre and mood tendencies per archetype. */
 const PROFILE: Record<Archetype, { bpm: number; genre: Partial<Record<string, number>>; mood: Partial<Record<string, number>> }> = {
   deep:     { bpm: 122, genre: { "Deep House": 0.62, House: 0.45 }, mood: { relaxed: 0.66, groovy: 0.55, aggressive: 0.12, approachability: 0.6 } },
-  tech:     { bpm: 127, genre: { "Tech House": 0.60, House: 0.38 }, mood: { party: 0.70, aggressive: 0.42, groovy: 0.58, approachability: 0.5 } },
+  tech:     { bpm: 127, genre: { "Tech House": 0.60, House: 0.38 }, mood: { party: 0.86, aggressive: 0.42, groovy: 0.58, approachability: 0.5 } },
   techno:   { bpm: 132, genre: { Techno: 0.68 }, mood: { aggressive: 0.60, dark: 0.62, relaxed: 0.18, approachability: 0.26 } },
   melodic:  { bpm: 124, genre: { "Melodic House & Techno": 0.63, Techno: 0.30 }, mood: { emotional: 0.64, uplifting: 0.58, dark: 0.40, approachability: 0.38 } },
   tropical: { bpm: 118, genre: { "Tropical / Sunset House": 0.64, House: 0.36 }, mood: { happy: 0.70, relaxed: 0.64, positive: 0.70, aggressive: 0.10 } },
-  disco:    { bpm: 120, genre: { "Disco / Nu-Disco": 0.66 }, mood: { happy: 0.72, groovy: 0.70, party: 0.60, positive: 0.72 } },
-  bass:     { bpm: 128, genre: { "Bass House": 0.62, "Tech House": 0.32 }, mood: { aggressive: 0.66, party: 0.68, dark: 0.45 } },
-  breaks:   { bpm: 134, genre: { Breaks: 0.60 }, mood: { party: 0.58, aggressive: 0.45, groovy: 0.52 } },
+  disco:    { bpm: 120, genre: { "Disco / Nu-Disco": 0.66 }, mood: { happy: 0.72, groovy: 0.70, party: 0.84, positive: 0.72 } },
+  bass:     { bpm: 128, genre: { "Bass House": 0.62, "Tech House": 0.32 }, mood: { aggressive: 0.66, party: 0.90, dark: 0.45 } },
+  breaks:   { bpm: 134, genre: { Breaks: 0.60 }, mood: { party: 0.82, aggressive: 0.45, groovy: 0.52 } },
   trance:   { bpm: 136, genre: { Trance: 0.64, "Melodic House & Techno": 0.3 }, mood: { uplifting: 0.74, emotional: 0.62, positive: 0.68 } },
 };
 
@@ -91,7 +91,11 @@ function buildFeatures(r: () => number, arch: Archetype): Features {
     bpm: Math.round(gauss(r, p.bpm, 3) * 2) / 2,
     key: pick(r, KEYS),
     durationS: Math.round(gauss(r, 330, 70)),
-    danceability: clamp01(gauss(r, 0.9, 0.08)),
+    // The real analyzer pins danceability near the ceiling for anything with a
+    // steady kick — median ~0.96, p75 ~0.998 — so this is a one-sided draw off
+    // 1.0 rather than a symmetric one around 0.9. A symmetric draw never clears
+    // the reference p75 and nothing would ever tag Peak.
+    danceability: clamp01(1 - Math.abs(gauss(r, 0, 0.07))),
     vocal,
     genre,
     mood,

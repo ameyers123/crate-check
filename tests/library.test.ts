@@ -3,6 +3,8 @@ import { generateLibrary } from "../lib/library/generate";
 import { computeThresholds, tagTrack, tagLibrary, hasTag } from "../lib/library/tagger";
 import { auditLibrary } from "../lib/library/audit";
 import type { Features, Track } from "../lib/library/types";
+import { buildCatalog } from "../lib/library/build-catalog";
+import { REFERENCE_THRESHOLDS, REFERENCE_CORPUS_SIZE } from "../lib/library/reference";
 
 const library = generateLibrary();
 const thresholds = computeThresholds(library);
@@ -356,5 +358,42 @@ describe("set shapes", () => {
     const peakAt = e.indexOf(Math.max(...e));
     expect(peakAt).toBeGreaterThan(0);
     expect(peakAt).toBeLessThan(e.length - 1);
+  });
+});
+
+describe("threshold stability", () => {
+  // The point of freezing the cutoffs: a record's tags are a property of the
+  // record, not of whatever else happens to be sitting next to it.
+  const catalog = buildCatalog();
+  const subject = catalog[0];
+
+  const tagsOf = (lib: Track[], opts?: { relativeTo?: "reference" | "library" }) => {
+    const { tracks } = tagLibrary(lib, opts);
+    return tracks
+      .find((t) => t.id === subject.id)!
+      .tags.map((t) => t.name)
+      .sort();
+  };
+
+  it("gives a track the same tags whatever else is in the library", () => {
+    const alone = tagsOf([subject]);
+    const full = tagsOf(catalog);
+    const half = tagsOf(catalog.filter((_, i) => i === 0 || i % 2 === 1));
+    expect(alone).toEqual(full);
+    expect(half).toEqual(full);
+  });
+
+  it("still shifts under the relative reading, which is why it isn't the default", () => {
+    // A one-track library has no spread, so every percentile collapses onto
+    // that track's own values and the tags it gets are close to meaningless.
+    const relativeAlone = tagsOf([subject], { relativeTo: "library" });
+    const relativeFull = tagsOf(catalog, { relativeTo: "library" });
+    expect(relativeAlone).not.toEqual(relativeFull);
+  });
+
+  it("reference cutoffs are frozen data, not recomputed from the catalog", () => {
+    const fromCatalog = computeThresholds(catalog);
+    expect(REFERENCE_THRESHOLDS).not.toEqual(fromCatalog);
+    expect(REFERENCE_CORPUS_SIZE).toBeGreaterThan(1000);
   });
 });

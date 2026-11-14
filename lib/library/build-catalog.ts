@@ -7,8 +7,9 @@
  * feature values here are reconstructed so that re-running the tagger over
  * them lands back on the same tags.
  *
- * So: the tags are real, the numbers behind them are a faithful reconstruction
- * rather than the original floats, and the tagger genuinely re-derives.
+ * So: the tags, BPM and durations are real; the mood/genre floats behind the
+ * tags are a faithful reconstruction rather than the originals, and the tagger
+ * genuinely re-derives from them.
  */
 
 import { CATALOG } from "./catalog";
@@ -22,13 +23,6 @@ function rhythmFor(row: CatalogRow): RhythmFeel {
   if (row.genre.some((g) => BROKEN_RHYTHM.has(g))) return row.bpm < 100 ? "halftime" : "broken";
   if (row.genre.includes("Disco / Nu-Disco")) return "swung";
   return "four-on-the-floor";
-}
-
-/** Extended mixes run long; radio edits run short. */
-function durationFor(row: CatalogRow): number {
-  if (/extended/i.test(row.title)) return 360 + Math.round((row.bpm % 7) * 12);
-  if (/radio edit/i.test(row.title)) return 190 + Math.round((row.bpm % 5) * 6);
-  return 280 + Math.round((row.bpm % 9) * 10);
 }
 
 /**
@@ -48,7 +42,22 @@ function jitter(seed: string, spread: number): number {
   return (((h >>> 0) % 1000) / 1000 - 0.5) * 2 * spread;
 }
 
-export function rowToTrack(row: CatalogRow, i: number): Track {
+/**
+ * The part of the reconstruction the thresholds depend on.
+ *
+ * Split out so the reference distribution can be computed over the *whole*
+ * analysis corpus with exactly the same arithmetic the demo catalog uses —
+ * otherwise the frozen cutoffs would describe a different scale from the one
+ * they're applied to.
+ */
+export interface TagOnlyRow {
+  artist: string;
+  title: string;
+  genre: string[];
+  vibe: string[];
+}
+
+export function reconstructMoodGenre(row: TagOnlyRow): Pick<Features, "genre" | "mood"> {
   const has = (list: string[], name: string) => list.includes(name);
   const j = (field: string, spread = 0.16) => jitter(`${row.artist}|${row.title}|${field}`, spread);
   const clamp = (x: number) => Math.max(0.01, Math.min(0.99, x));
@@ -92,10 +101,15 @@ export function rowToTrack(row: CatalogRow, i: number): Track {
     approachability: clamp(has(vibe, "Hypnotic") ? 0.12 + j("appr", 0.05) : 0.56 + j("appr")),
   };
 
+  return { genre, mood };
+}
+
+export function rowToTrack(row: CatalogRow, i: number): Track {
+  const { genre, mood } = reconstructMoodGenre(row);
   const features: Features = {
     bpm: row.bpm,
     key: row.key,
-    durationS: durationFor(row),
+    durationS: row.durationS,
     danceability: row.danceability,
     vocal: row.vocal === "voice" ? 0.82 : 0.14,
     genre,
@@ -105,7 +119,7 @@ export function rowToTrack(row: CatalogRow, i: number): Track {
     familiarity: row.familiarity,
     vocalDetail: row.vocalDetail,
     rhythm: rhythmFor(row),
-    hasBreakdown: !row.genre.includes("Techno") || has(vibe, "Emotional"),
+    hasBreakdown: !row.genre.includes("Techno") || row.vibe.includes("Emotional"),
   };
 
   return {

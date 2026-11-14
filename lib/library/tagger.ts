@@ -3,10 +3,14 @@
  *
  * Two design choices worth stating.
  *
- * 1. **Thresholds are percentiles of this library, not fixed constants.**
- *    "Dark" means dark *relative to what you own*. A techno-heavy library and a
- *    disco-heavy one should not inherit the same cutoffs, and a fixed 0.7 would
- *    tag everything in one and nothing in the other.
+ * 1. **Thresholds are frozen, measured over a 3,500-track corpus.**
+ *    A fixed 0.7 really would tag everything in a techno library and nothing in
+ *    a disco one — but the fix for that is normalising the *input*, not making
+ *    the *labels* relative. Percentiles of whatever array you happen to pass in
+ *    mean a record re-tags when its neighbours change and a filtered playlist
+ *    re-bases every cutoff against a handful of songs. So the bars live in
+ *    `reference.ts` and don't move. `tagLibrary(tracks, { relativeTo: "library" })`
+ *    still gives the relative reading for anyone who wants it.
  *
  * 2. **Tags overlap on purpose.** A track can be Tech House and Techno, Party
  *    and Hypnotic. Forcing one genre per track is what makes existing library
@@ -19,6 +23,7 @@
 
 import type { Features, Tag, TaggedTrack, Track } from "./types";
 import { GENRE_FAMILIES } from "./types";
+import { REFERENCE_THRESHOLDS } from "./reference";
 
 /** Percentile of a sorted array, linear interpolation. */
 function pct(sorted: number[], p: number): number {
@@ -240,8 +245,20 @@ export function tagTrack(track: Track, th: Thresholds): TaggedTrack {
   };
 }
 
-export function tagLibrary(tracks: Track[]): { tracks: TaggedTrack[]; thresholds: Thresholds } {
-  const thresholds = computeThresholds(tracks);
+/**
+ * Tag a set of tracks.
+ *
+ * Defaults to the frozen reference cutoffs, so a record tags the same way
+ * regardless of what else happens to be in the array. Pass
+ * `{ relativeTo: "library" }` for the other reading — "dark *for this
+ * collection*" — which is a genuine question, just not the default one.
+ */
+export function tagLibrary(
+  tracks: Track[],
+  opts: { relativeTo?: "reference" | "library" } = {},
+): { tracks: TaggedTrack[]; thresholds: Thresholds } {
+  const thresholds =
+    opts.relativeTo === "library" ? computeThresholds(tracks) : REFERENCE_THRESHOLDS;
   return { tracks: tracks.map((t) => tagTrack(t, thresholds)), thresholds };
 }
 

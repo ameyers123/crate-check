@@ -27,10 +27,10 @@ const mmss = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).
  * that tempo decides everything.
  */
 const DEMO_PICKS = [
-  { match: "Keep Moving", scenario: "warm-up, vocal" },
-  { match: "L.I.F.E", scenario: "afterhours tool" },
-  { match: "You Little Beauty", scenario: "peak-time floor saver" },
-  { match: "places to be", scenario: "87 BPM, still hard" },
+  { match: "Africa", scenario: "energy 1, still a Reset" },
+  { match: "Melodic Phase", scenario: "afterhours tool" },
+  { match: "September", scenario: "the floorfiller" },
+  { match: "Mr. Brightside", scenario: "148 BPM, energy 10" },
 ];
 
 function Meter({ label, value }: { label: string; value: number }) {
