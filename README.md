@@ -25,10 +25,11 @@ BPM and key are measurable, so everyone has them. Feel isn't, so nobody does.
 | 1 | **Find** — decide what to look for | you |
 | 2 | **Collect** — get the files | you |
 | 3 | **Check** — are they what they claim? | crate-check |
-| 4 | **Analyze & tag** — read the audio, label it | crate-check |
-| 5 | **Plan** — shape the set beforehand | crate-check |
-| 6 | **Play live** — decide what goes next | crate-check |
-| 7 | **Export** — back into Rekordbox | crate-check |
+| 4 | **Analyze** — measure the audio itself | crate-check |
+| 5 | **Tag** — turn the numbers into words | crate-check |
+| 6 | **Plan** — shape the set beforehand | crate-check |
+| 7 | **Play live** — decide what goes next | crate-check |
+| 8 | **Export** — back into Rekordbox | crate-check |
 
 ## The tag vocabulary
 
@@ -52,7 +53,9 @@ Three things about how tagging works:
 
 **Tags overlap on purpose.** A track can be Tech House *and* Techno, Party *and* Hypnotic. One genre slot per track is why library tools are bad at finding a specific record.
 
-**Thresholds are percentiles of your library, not fixed constants.** "Dark" means dark relative to what *you* own. A fixed cutoff would tag everything in a techno library and nothing in a disco one. A consequence worth knowing: the same record can tag differently in two different libraries, and that's correct.
+**Thresholds are frozen, and that was a decision.** They used to be percentiles of whatever library was in front of the tagger — "Dark" meaning dark relative to what *you* own. That sounds right, and it survives about one question: it means a record re-tags when its neighbours change, and filtering to a playlist re-bases every cutoff against a handful of songs. It doesn't survive its own logic either. Grow the library toward everything ever released and percentile-of-your-library converges on percentile-of-all-music, which is a fixed cutoff. Library-relative percentiles were only ever a small-sample stand-in for a global one.
+
+The original worry was real — a fixed 0.7 would tag everything in a techno library and nothing in a disco one — but the fix for that is normalising the *input*, not making the *labels* relative. So cutoffs are measured once over the full 3,564-track corpus and committed as data. The relative reading is still there as a toggle in the Tag stage, and it's worth playing with: switch Mr. Brightside to library-relative and it picks up **Relaxed**.
 
 **Every tag records why it fired.** Not `Hypnotic` but `Hypnotic — techno-family 0.61, approachability 0.14 ≤ p33, not top-quartile aggressive`. A tag you disagree with can be argued with.
 
@@ -103,6 +106,8 @@ These checks need **nothing but the metadata you already have** — no lookups, 
 
 Nothing is deleted. You get a short list to listen through.
 
+**And a note on what these can't do.** Every rule above compares a file's length against what its title promises, which means a file that is the right length and still garbage sails through all of them — six minutes of white noise, named like a record, passes every one. The Analyze stage catches it in about a second from two measurements over the actual samples. Knowing which checks are free and which need the audio is most of the work of deciding what to run.
+
 ## Export
 
 Tags are only worth anything if they're there while you're playing, so they go into standard ID3 fields:
@@ -119,8 +124,8 @@ Because they live in the file, they're on the USB in the booth — not in an app
 
 ```bash
 npm install
-npm test      # 40 tests: tagging rules, Camelot maths, set shapes, audit checks
-npm run verify # rebuild demo data, print tag coverage and every set shape's curve
+npm test      # 50 tests: tagging, Camelot maths, set shapes, audit checks, DSP
+npm run generate # rebuild demo data, print tag coverage and every set shape's curve
 npm run dev   # the tool, at localhost:3000
 ```
 
@@ -128,20 +133,24 @@ npm run dev   # the tool, at localhost:3000
 
 ```
 lib/library/
-  types.ts         Features (what's measured) vs Tags (what you search by)
-  tagger.ts        percentile thresholds, overlapping tags, energy, role tags
-  mixing.ts        Camelot wheel, the four signals, emergency filtering
-  setshapes.ts     the six shapes and the planner
-  audit.ts         self-contained file checks
-  catalog.ts       the 43-track demo catalog
-app/tool/          the interface — same modules, running in the browser
+  types.ts           Features (what's measured) vs Tags (what you search by)
+  analyze-audio.ts   FFT, spectral centroid, onset envelope, tempo
+  reference.ts       the frozen cutoffs, generated from the full corpus
+  tagger.ts          overlapping tags, energy, role tags
+  mixing.ts          Camelot wheel, the four signals, emergency filtering
+  setshapes.ts       the six shapes and the planner
+  audit.ts           self-contained file checks
+  catalog.ts         the 62-track demo catalog
+app/tool/            the interface — same modules, running in the browser
 ```
 
 ## About the data
 
-The demo catalog is 43 widely-known dance records. Their **BPM is measured** and their **genre, feel and function tags are the real output** of an audio-analysis pass over a 3,000-track library — not invented.
+The demo catalog is 62 widely-known records — ABBA, Billie Jean, September, Mr. Brightside, Toxic, Take on Me, One More Time — plus recent material and enough instrumental house that the Bridge/Tool and Afterhours roles aren't empty. **BPM, duration, genre, feel, function, danceability and vocal/instrumental are the real output** of an audio-analysis pass over a 3,564-track library. Tracks whose analysis was incomplete were dropped rather than filled in.
 
-Two honest caveats. **Camelot keys are illustrative**: that analysis pass didn't extract key, so they're assigned here to give the harmonic-mixing views a realistic spread. And the underlying feature *numbers* are reconstructed from the real tags so the tagger genuinely re-derives them live in your browser rather than reading a cached answer.
+Two honest caveats. **Camelot keys are illustrative** — that pass didn't extract key, so they're assigned here to give the harmonic-mixing views a realistic spread. And the underlying mood *floats* are reconstructed from the real tags, so the tagger genuinely re-derives them in your browser rather than reading a cached answer.
+
+The three audio clips in the Analyze stage are synthesized — a kick loop, a pad, and white noise — so nothing here carries anyone's rights.
 
 No personal library, listening history or playlists are published.
 
