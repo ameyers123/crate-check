@@ -3,7 +3,6 @@ import { generateLibrary } from "../lib/library/generate";
 import { computeThresholds, tagTrack, tagLibrary, hasTag } from "../lib/library/tagger";
 import { auditLibrary } from "../lib/library/audit";
 import type { Features, Track } from "../lib/library/types";
-import { buildCatalog } from "../lib/library/build-catalog";
 import { REFERENCE_THRESHOLDS, REFERENCE_CORPUS_SIZE } from "../lib/library/reference";
 
 const library = generateLibrary();

@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { tagLibrary } from "@/lib/library/tagger";
 import {
   EMERGENCY_COPY,
   compatibleKeys,
@@ -10,7 +9,7 @@ import {
   whatFitsNext,
 } from "@/lib/library/mixing";
 import type { Emergency, NextCandidate, Signal } from "@/lib/library/mixing";
-import type { TaggedTrack, Track } from "@/lib/library/types";
+import type { TaggedTrack } from "@/lib/library/types";
 import { Section } from "../sections/ui";
 
 const TONE: Record<Signal["verdict"], string> = {
@@ -125,15 +124,32 @@ function CandidateCard({ c, rank }: { c: NextCandidate; rank?: number }) {
   );
 }
 
-export default function Live({ library }: { library: Track[] }) {
-  const { tracks } = useMemo(() => tagLibrary(library), [library]);
+export default function Live({
+  tracks,
+  crate,
+  shapeName,
+}: {
+  tracks: TaggedTrack[];
+  crate: TaggedTrack[];
+  shapeName: string;
+}) {
+  const [source, setSource] = useState<"crate" | "library">("crate");
   const [currentId, setCurrentId] = useState(
-    () => tracks.find((t) => t.tags.some((x) => x.name === "Driving"))?.id ?? tracks[0].id,
+    () => crate.find((t) => t.tags.some((x) => x.name === "Driving"))?.id ?? crate[0].id,
   );
   const [emergency, setEmergency] = useState<Emergency | null>(null);
 
-  const current = tracks.find((t) => t.id === currentId) as TaggedTrack;
-  const next = useMemo(() => whatFitsNext(current, tracks, { limit: 5 }), [current, tracks]);
+  // The crate changes when the set shape upstream changes, so a record that was
+  // playing may no longer be in it.
+  const current =
+    crate.find((t) => t.id === currentId) ??
+    tracks.find((t) => t.id === currentId) ??
+    crate[0];
+
+  const pool = source === "crate" ? crate : tracks;
+  const next = useMemo(() => whatFitsNext(current, pool, { limit: 5 }), [current, pool]);
+  // An emergency always reaches past the crate: if what you prepared worked,
+  // you wouldn't be pressing the button.
   const rescue = useMemo(
     () => (emergency ? emergencyOptions(current, tracks, emergency) : []),
     [emergency, current, tracks],
@@ -147,17 +163,39 @@ export default function Live({ library }: { library: Track[] }) {
       title="In the booth, you have about two minutes to decide"
       lede="This is where the tags pay for themselves. The track playing sets four constraints — key, tempo, energy and how much runway the next record gives you — and the library can be ranked against all four at once instead of you remembering."
     >
+      <div className="mb-4 flex flex-wrap items-center gap-2">
+        <span className="text-[13px] text-muted">Pick the next record from</span>
+        {(
+          [
+            ["crate", `the ${shapeName} set you planned`, crate.length],
+            ["library", "the whole library", tracks.length],
+          ] as const
+        ).map(([k, label, n]) => (
+          <button
+            key={k}
+            onClick={() => setSource(k)}
+            className={`rounded-lg border px-3 py-1.5 text-[13px] transition-colors ${
+              source === k
+                ? "border-accent/50 bg-accent/10 text-accent"
+                : "border-edge text-muted hover:text-foreground"
+            }`}
+          >
+            {label} <span className="font-mono opacity-60">{n}</span>
+          </button>
+        ))}
+      </div>
+
       <div className="mb-4">
         <label className="mb-2 block text-[13px] text-muted">Currently playing</label>
         <select
-          value={currentId}
+          value={current.id}
           onChange={(e) => {
             setCurrentId(e.target.value);
             setEmergency(null);
           }}
           className="w-full rounded-lg border border-edge bg-panel px-3 py-2.5 text-[14px] outline-none focus:border-accent/50"
         >
-          {tracks.map((t) => (
+          {pool.map((t) => (
             <option key={t.id} value={t.id}>
               {t.artist} — {t.title} ({t.features.bpm} BPM, {t.features.key})
             </option>
@@ -235,8 +273,9 @@ export default function Live({ library }: { library: Track[] }) {
               Something&rsquo;s going wrong
             </h3>
             <p className="mt-2 text-[12px] leading-relaxed text-muted">
-              Three things actually go wrong in a set. Each of these filters the library to
-              what you can genuinely play from where you are right now.
+              Three things actually go wrong in a set. Each of these reaches past the crate
+              into the whole library &mdash; if what you prepared was working, you wouldn&rsquo;t
+              be pressing the button &mdash; and keeps only what you can play from here.
             </p>
             <div className="mt-3 space-y-1.5">
               {(Object.keys(EMERGENCY_COPY) as Emergency[]).map((k) => (
@@ -266,8 +305,8 @@ export default function Live({ library }: { library: Track[] }) {
           <div className="mt-4 grid gap-2 sm:grid-cols-2">
             {rescue.length === 0 ? (
               <p className="text-[13px] text-muted">
-                Nothing in this library fits from here — which is itself useful to know
-                before you need it.
+                Nothing in the whole library fits from here — which is itself useful to
+                know before you need it.
               </p>
             ) : (
               rescue.map((c) => <CandidateCard key={c.track.id} c={c} />)

@@ -1,10 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { hasTag, tagLibrary } from "@/lib/library/tagger";
-import { SET_SHAPES, planSet } from "@/lib/library/setshapes";
+import { hasTag } from "@/lib/library/tagger";
+import { SET_SHAPES } from "@/lib/library/setshapes";
+import type { PlannedSlot, SetShape } from "@/lib/library/setshapes";
 import { keyDistance } from "@/lib/library/mixing";
-import type { TaggedTrack, Track } from "@/lib/library/types";
+import type { TaggedTrack } from "@/lib/library/types";
 import { VIBE_TAGS } from "@/lib/library/types";
 import { Section } from "../sections/ui";
 
@@ -32,12 +33,19 @@ function Row({ t, prev }: { t: TaggedTrack; prev?: TaggedTrack }) {
   );
 }
 
-export default function Build({ library }: { library: Track[] }) {
-  const { tracks } = useMemo(() => tagLibrary(library), [library]);
-
-  const [shapeId, setShapeId] = useState("classic");
-  const shape = SET_SHAPES.find((s) => s.id === shapeId)!;
-  const plan = useMemo(() => planSet(shape, tracks), [shape, tracks]);
+export default function Build({
+  tracks,
+  shape,
+  plan,
+  onShapeChange,
+}: {
+  tracks: TaggedTrack[];
+  shape: SetShape;
+  plan: PlannedSlot[];
+  onShapeChange: (id: string) => void;
+}) {
+  const shapeId = shape.id;
+  const setShapeId = onShapeChange;
 
   const [vibe, setVibe] = useState<string>("Hypnotic");
   const [bpm, setBpm] = useState<[number, number]>([115, 135]);
