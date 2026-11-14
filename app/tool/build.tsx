@@ -86,18 +86,20 @@ export default function Build({ library }: { library: Track[] }) {
         <p className="mt-1.5 max-w-2xl text-[13px] leading-relaxed text-muted">{shape.job}</p>
 
         {/* Energy curve: target vs what the planner found */}
-        <div className="mt-5 flex h-32 items-end gap-1.5 rounded-lg border border-edge/70 bg-background/40 p-3">
+        <div className="mt-5 flex h-32 items-end gap-1.5 overflow-hidden rounded-lg border border-edge/70 bg-background/40 p-3">
           {plan.map((slot, i) => (
-            <div key={i} className="flex h-full flex-1 flex-col justify-end gap-0.5">
+            <div
+              key={i}
+              className="relative h-full flex-1"
+              title={`${slot.track.title} — energy ${slot.track.energy}/10, target ${slot.target}/10`}
+            >
               <div
-                className="w-full rounded-t bg-accent/80 transition-all duration-500"
+                className="absolute inset-x-0 bottom-0 rounded-t bg-accent/80 transition-all duration-500"
                 style={{ height: `${(slot.track.energy / curveMax) * 100}%` }}
-                title={`${slot.track.title} — energy ${slot.track.energy}/10`}
               />
               <div
-                className="w-full border-t border-dashed border-muted/50"
-                style={{ marginBottom: `${(slot.target / curveMax) * 100}%` }}
-                title={`target ${slot.target}/10`}
+                className="absolute inset-x-0 border-t border-dashed border-muted/70 transition-all duration-500"
+                style={{ bottom: `${(slot.target / curveMax) * 100}%` }}
               />
             </div>
           ))}

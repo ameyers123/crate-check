@@ -21,6 +21,18 @@ const GROUP_NOTE: Record<Tag["group"], string> = {
 
 const mmss = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
 
+/**
+ * The demo tracks, chosen for contrast rather than taste: a warm-up vocal, an
+ * afterhours tool, a peak-time floor saver, and one that breaks the assumption
+ * that tempo decides everything.
+ */
+const DEMO_PICKS = [
+  { match: "Keep Moving", scenario: "warm-up, vocal" },
+  { match: "L.I.F.E", scenario: "afterhours tool" },
+  { match: "You Little Beauty", scenario: "peak-time floor saver" },
+  { match: "places to be", scenario: "87 BPM, still hard" },
+];
+
 function Meter({ label, value }: { label: string; value: number }) {
   return (
     <div>
@@ -40,11 +52,15 @@ function Meter({ label, value }: { label: string; value: number }) {
 
 export default function Analyze({ library }: { library: Track[] }) {
   const thresholds = useMemo(() => computeThresholds(library), [library]);
-  // A few tracks with genuinely different characters, so switching shows contrast.
-  const picks = useMemo(
-    () => [library[4], library[17], library[41], library[66]].filter(Boolean),
-    [library],
-  );
+  // Four well-known records that land in four different places, so switching
+  // shows what the tagger is actually reacting to. Matched by title rather
+  // than index so edits to the catalog can't quietly drop one.
+  const picks = useMemo(() => {
+    const found = DEMO_PICKS.map((d) =>
+      library.find((t) => t.title.toLowerCase().includes(d.match.toLowerCase())),
+    ).filter((t): t is Track => Boolean(t));
+    return found.length >= 2 ? found : library.slice(0, 4);
+  }, [library]);
   const [idx, setIdx] = useState(0);
   const [done, setDone] = useState(false);
 
@@ -70,11 +86,14 @@ export default function Analyze({ library }: { library: Track[] }) {
               setIdx(i);
               setDone(false);
             }}
-            className={`rounded-lg border px-3 py-1.5 text-[13px] transition-colors ${
+            className={`rounded-lg border px-3 py-1.5 text-left text-[13px] transition-colors ${
               i === idx ? "border-foreground/40 bg-panel2" : "border-edge text-muted hover:text-foreground"
             }`}
           >
-            {p.title}
+            <span className="block">{p.title}</span>
+            <span className="block font-mono text-[10px] text-muted">
+              {DEMO_PICKS[i]?.scenario}
+            </span>
           </button>
         ))}
       </div>
