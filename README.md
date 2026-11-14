@@ -1,125 +1,118 @@
 # crate-check
 
-**Building a 470-track DJ crate for a week in the desert — and the pipeline that got it there.**
+**Your DJ library knows BPM and key. It has no idea how anything feels.**
 
-[**Walk through it →**](https://crate-check-delta.vercel.app)
+So you can't ask it for a hypnotic track around 126, or for something to open with. crate-check analyzes each file, tags it with genre, feel and where it belongs in a night, then lets you search by that — and writes the tags back into standard ID3 fields so they show up in Rekordbox and on a CDJ.
+
+[**Try it →**](https://crate-check-delta.vercel.app) · runs in the browser on a sample library, nothing to install
 
 ---
 
-## What this is
+## The problem
 
-A case study of a real project: assembling a DJ crate for a 2026 desert event. Nine places to dig, one hard deadline, 491 candidate tracks, and a dancefloor that notices when you get it wrong.
+Rekordbox manages your library and plays it. Lexicon cleans up metadata. Mixed In Key does key and energy. Between them you still can't answer the two questions that come up most:
 
-The site walks through all six stages. This README covers the same ground.
+- *"What should I open with?"*
+- *"Give me something hypnotic around 126."*
 
-## The six stages
+Neither is answerable, because nothing in that stack tags **how a record feels** or **where it sits in a night**. BPM and key are measurable so everyone has them. Feel isn't, so nobody does.
 
-### 1. Discover — nine places the music comes from
+## Where it fits
 
-Charts say what's big. Artist radio says what sits next to a sound you already trust. Curated playlists carry a point of view. Your own saves are the only source that knows what you actually reached for.
-
-| source | kind | tracks |
+| | step | who does it |
 |---|---|---|
-| `liked` | saved | 116 |
-| `beatport_top_100_indie_dance` | chart | 96 |
-| `indie_dance_2026_top_100` | chart | 84 |
-| `la_french_touch` | curated | 53 |
-| `damian_lazarus_radio` | artist radio | 48 |
-| `jamie_xx_radio` | artist radio | 47 |
-| `tinzo_jojo_groovy_sunset` | curated | 35 |
-| `i_love_whatever_this_is` | curated | 22 |
-| `chitiweiner_groovers` | curated | 1 |
+| 1 | **Find** — decide what to look for | you, wherever you listen |
+| 2 | **Collect** — get the files | you |
+| 3 | **Check** — are they what they claim? | crate-check |
+| 4 | **Analyze & tag** — read the audio, label it | crate-check |
+| 5 | **Build** — search by feel, plan a set | crate-check |
+| 6 | **Export** — back into Rekordbox | crate-check |
 
-Those add to more than 491, because a track can surface in several places at once — and that overlap turns out to be the most valuable signal in the pipeline. One algorithmic playlist recommending something is a guess. Two unrelated sources agreeing is evidence.
+Steps 3–6 are normally split across four tools and a spreadsheet. This does them in one place and hands the result back, so you keep organising and playing where you already do.
 
-### 2. Reconcile — most of what you find, you already own
+## What it does
 
-~1,200 raw candidates → **491 genuinely new**, after matching against the existing library.
+### Check — find files that aren't what they say they are
 
-This can't be a title match. 28 of these tracks share a title with a *different recording* — "The Future" exists as a 3:07 single and a 7:29 extended mix, and they're not interchangeable in a set. Matching on name either loses a track you wanted or quietly swaps one for another.
+Collect a few hundred tracks at once and some of them are wrong. Not corrupted, *wrong*: a file named like a three-minute single that's actually a 47-minute festival recording. You find out when you load it.
 
-### 3. Prioritize — you can't dig everything
+These checks need **nothing but the metadata you already have** — no lookups, no account, no reference database. They work because a title makes a promise about length:
 
-491 candidates is more than a week of listening, and a set has finite slots. The rubric scores two things: how **current** a track is, and how much **independent evidence** says it belongs.
-
-| tier | meaning | tracks |
-|---|---|---|
-| P0 | 2026 release, corroborated across sources | 5 |
-| P1 | 2026 release, on a dance playlist | 247 |
-| P2 | 2026 release, personally saved | 25 |
-| P4 | Curated playlist, 2020 or later | 104 |
-| P5 | Curated playlist, back catalogue | 23 |
-| P6 | Recently saved (2025–26) | 85 |
-| P7 | Incidental playlist appearance | 2 |
-
-The live demo has a budget slider: drag it to 25 tracks and only P0 survives — five records out of 491 where recency and two independent sources all agree. Everything below that line is a judgement call about how much risk the set can carry.
-
-### 4. Acquire — the first approach failed on two thirds of the list
-
-| attempt | recovered | lesson |
-|---|---|---|
-| One large batch | 172 / 464 | 63% failed — sustained traffic got throttled |
-| Retry the failures, twice | 0 / 292 | Zero. Including after a four-hour wait. |
-| Small paced waves | 193 / 292 | 66% recovered |
-
-The second row is the useful one. Retrying harder and then waiting hours both recovered exactly nothing, because **the limit was how fast requests arrived, not how many had been sent**. Patience was never going to be the lever. Naming the constraint correctly was worth more than any amount of effort spent against the wrong one.
-
-### 5. Verify — correct name, wrong recording
-
-Files arrived tagged perfectly: right artist, right title, right remix credit. Some of them were the wrong audio — a seven-minute festival set sitting where a three-minute single should be. You find that out now, or you find it out on stage.
-
-**The tags can't tell you.** Whatever collected the file also wrote its labels, so checking the label against the plan only proves the collector agreed with itself. The only honest check is to open the file and measure what actually came back.
-
-What "wrong" looked like in practice:
-
-| what arrived | caught by |
+| check | rule |
 |---|---|
-| A continuous festival set with the song buried inside | expected 4:51, got 11:08 |
-| An acapella — vocals, no beat, unmixable | runtime, then the label |
-| The extended mix when the original was planned for | 1.4× too long |
-| A truncated clip that cuts off partway | expected 5:12, got 2:54 |
-| A live recording — crowd noise, different arrangement | runtime looked fine; the label gave it away |
+| Set filed as a track | over 15 min with no "mix / set / live" in the title |
+| Truncated file | under 90 seconds |
+| Radio Edit too long | title says "Radio Edit", file runs over 6 min |
+| Extended too short | title says "Extended", file runs under 4 min |
+| Duplicate mismatch | same artist + title, lengths differ by more than 25% |
 
-**108 files** arrived wrong this way. Verification caught all of them and they were re-collected properly. Without the check, 108 wrong recordings would be sitting in the crate right now with perfect tags — roughly one in four of everything collected.
+Nothing gets deleted. You get a short list to listen through, because the cost of a wrong file is paid later, in front of people.
 
-The rules needed tuning, not guessing. An early version rejected anything whose label didn't explicitly confirm the version, which threw out *correct* files — official uploads routinely drop the remix credit from the title. The fix was a third outcome: **"nothing confirms this" is not the same as "something contradicts this."** Unconfirmed files go to a short listen-through queue (~7% of the catalogue) instead of the bin.
+### Analyze & tag — a file goes in, something searchable comes out
 
-### 6. Crate — what ended up in the box
+An audio file by itself is a filename and a waveform. The analyzer returns ~40 numbers per track (BPM, key, danceability, voice, and probabilities for every mood and genre family). The tagger turns those into words you'd actually type into a search box, in three groups:
 
-**470 tracks that are what they say they are.**
+- **Genre** — House, Deep House, Tech House, Techno, Melodic House & Techno, Tropical / Sunset House, Disco / Nu-Disco, Bass House, Breaks, Trance
+- **Feel** — Party, Happy, Relaxed, Hypnotic, Aggressive, Dark, Emotional, Groovy, Euphoric
+- **Function** — Vocal, Instrumental, Warm-up, Driving, Peak, Afterhours
 
-- **By era:** 107 from 2026, 103 from 2025, 60 from 2024, 102 from 2020–23, 119 pre-2020
-- **By version:** 372 originals, 88 remixes, 31 edits/extended
-- **Runtime spread:** 2:10 to 11:25, median 4:13
+Three things about how the tagging works:
 
-A crate isn't a playlist. It's raw material for a set that hasn't been planned yet, so it needs range — openers, peaks, comedowns, and tracks long enough to mix out of. The weighting toward recent years keeps a set current; the quarter that predates 2020 is what a floor already knows.
+**Tags overlap on purpose.** A track can be Tech House *and* Techno, Party *and* Hypnotic. One genre slot per track is why library tools are bad at finding a specific record — the single slot is always the wrong one for the search you're doing.
 
-That 2:10–11:25 spread is also why the quality check can't use one percentage tolerance for everything. Five percent of an eleven-minute track is thirty-three seconds — wide enough to let an entirely different edit through.
+**Thresholds are percentiles of your library, not fixed constants.** "Dark" means dark relative to what *you* own. A fixed 0.7 cutoff would tag everything in a techno library and nothing in a disco one.
 
-## Three things that generalise past music
+**Every tag records why it fired.** Not `Hypnotic` but `Hypnotic — techno-family=0.61 high, approachability=0.21 ≤ p33, not top-quartile aggressive`. A tag you disagree with can be argued with instead of just deleted.
 
-**A metric that can't go down isn't measuring anything.** One recovery pass reported 177 of 177 succeeded. It hadn't — the real number was 169. The counter measured a field the process filled in *before doing any work*, so it was structurally incapable of reporting failure. It surfaced only because a file count disagreed with it.
+### Build — search by feel, plan a set
 
-**Name the constraint before optimising against it.** Two full retry cycles recovered nothing because the problem looked like volume and was actually rate.
+Pick a feel and a BPM range, get a tracklist. That's the query that isn't possible today.
 
-**"Unverified" and "wrong" need separate buckets.** Collapsing them forces a bad trade: trust everything and ship errors, or reject everything and bury the real failures where nobody reads them.
+Then there's the set arc. A night has a shape — you open slower and softer, build, peak, bring it down — and the function tags map straight onto it. The tool assembles a starting order across **Warm-up → Driving → Peak → Afterhours**, shows the BPM curve, and marks which keys are harmonically compatible with the track above them so you can see where a transition will sit before you try it.
+
+### Export — hand it back to Rekordbox
+
+Tags are only worth anything if they're there while you're playing. They get written into standard ID3 fields:
+
+```
+Comment   Deep House / Relaxed / Warm-up
+Grouping  Warm-up
+Genre     Deep House
+```
+
+Nothing proprietary. Because the tags live in the file, they're on the USB stick in the booth — not in an app on a laptop at home. Typing "Peak" on a CDJ and getting the 19 tracks that work there beats scrolling 3,000 filenames under pressure.
 
 ## Running it
 
 ```bash
 npm install
-npm test        # 28 tests covering the verification rules
-npm run verify  # run the checks over the sample catalogue
-npm run dev     # the walkthrough, at localhost:3000
+npm test        # 19 tests over the tagging rules and audit checks
+npm run verify  # regenerate the sample library, print tag coverage
+npm run dev     # the tool, at localhost:3000
 ```
+
+## How it's built
+
+```
+lib/library/
+  types.ts      Features (what the analyzer measures) vs Tags (what you search by)
+  tagger.ts     percentile thresholds + the rules, each returning its own reason
+  audit.ts      the self-contained file checks
+  generate.ts   sample library generator
+app/tool/       the interface — same modules, running in the browser
+```
+
+Keeping `Features` and `Tags` as separate types is what makes the tagging explainable: every tag can point back at the numbers and the threshold that produced it.
 
 ## About the data
 
-The **structure is real** — the nine sources, the priority tiers, the funnel counts, the throughput numbers, the outcomes. Individual **track titles and artists are generated**, so nothing here publishes a personal library. Generated ISRCs use the reserved `ZZ` country code, which is never issued, so none can collide with a real recording.
+The sample library is **generated** — invented artists and titles, with audio features shaped to match how a real house/techno collection is distributed. The tagging rules, thresholds and audit checks are the real implementation, running live in the browser. No files are uploaded and no personal library is published.
 
-The verification step is real working code: the module the page runs in your browser is the same one the test suite covers.
+The tag vocabulary came out of running audio analysis over a real ~3,000-track library and working out which labels were actually worth having.
 
-**This project validates a collection; it does not acquire one.** How files get obtained sits behind an interface whose only implementation here is a stand-in.
+## Scope
+
+crate-check starts once files exist on your disk. It doesn't fetch anything, and acquisition is deliberately outside it — whether a given download is OK depends on the rights to that specific recording and the terms of the service hosting it, which is a decision for you rather than something to automate.
 
 ## License
 

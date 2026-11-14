@@ -6,9 +6,9 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "crate-check — validating what a pipeline actually delivered",
+  title: "crate-check — tag your DJ library by how it actually feels",
   description:
-    "An interactive demo of a three-way validation engine for media libraries: measure the artifact, corroborate provenance, and separate 'contradicted' from 'unconfirmed'.",
+    "Analyze each track, tag it with genre, feel and where it belongs in a night, then search by vibe and build a set. Working demo, runs in the browser.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

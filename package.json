@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "generate": "tsx scripts/generate.ts",
-    "verify": "tsx cli/verify.ts",
+    "verify": "tsx scripts/generate.ts",
     "test": "vitest run"
   },
   "dependencies": {

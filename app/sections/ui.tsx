@@ -2,20 +2,22 @@ import type { ReactNode } from "react";
 
 export function Section({
   n,
+  id,
   kicker,
   title,
   lede,
   children,
 }: {
   n?: number;
+  id?: string;
   kicker: string;
   title: string;
   lede?: ReactNode;
   children: ReactNode;
 }) {
   return (
-    <section className="border-t border-edge/60 py-16 sm:py-20">
-      <div className="mx-auto w-full max-w-5xl px-5 sm:px-8">
+    <section id={id} className="scroll-mt-4 border-t border-edge/60 py-16 sm:py-20">
+      <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
         <div className="mb-9 max-w-2xl">
           <div className="mb-3 flex items-center gap-2.5">
             {n !== undefined && (

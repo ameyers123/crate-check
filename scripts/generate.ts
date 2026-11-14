@@ -1,29 +1,34 @@
 /**
- * Rebuild the committed synthetic catalog.
+ * Rebuild the committed sample library.
  *
  *   npm run generate
  *
- * Output is deterministic for a given seed, so the committed JSON and a fresh
- * run of this script always agree.
+ * Deterministic for a given seed: the committed JSON and a fresh run agree.
  */
 
 import { writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
-import { generateCatalog } from "../lib/data/generate-catalog";
+import { generateLibrary } from "../lib/library/generate";
+import { tagLibrary } from "../lib/library/tagger";
+import { auditLibrary } from "../lib/library/audit";
 
-const entries = generateCatalog();
-const outDir = join(process.cwd(), "lib", "data");
+const tracks = generateLibrary();
+const { tracks: tagged } = tagLibrary(tracks);
+const issues = auditLibrary(tracks);
+
+const outDir = join(process.cwd(), "lib", "library");
 mkdirSync(outDir, { recursive: true });
+writeFileSync(join(outDir, "sample.json"), JSON.stringify(tracks, null, 2) + "\n", "utf8");
 
-const outFile = join(outDir, "catalog.json");
-writeFileSync(outFile, JSON.stringify(entries, null, 2) + "\n", "utf8");
+const counts: Record<string, number> = {};
+for (const t of tagged) for (const tag of t.tags) counts[tag.name] = (counts[tag.name] ?? 0) + 1;
 
-const counts = entries.reduce<Record<string, number>>((acc, e) => {
-  acc[e.scenario] = (acc[e.scenario] ?? 0) + 1;
-  return acc;
-}, {});
-
-console.log(`wrote ${entries.length} entries -> lib/data/catalog.json`);
-for (const [scenario, n] of Object.entries(counts).sort((a, b) => b[1] - a[1])) {
-  console.log(`  ${String(n).padStart(3)}  ${scenario}`);
+console.log(`wrote ${tracks.length} tracks -> lib/library/sample.json`);
+console.log(`\ntag coverage:`);
+for (const [k, v] of Object.entries(counts).sort((a, b) => b[1] - a[1])) {
+  console.log(`  ${String(v).padStart(4)}  ${k}  (${Math.round((v / tracks.length) * 100)}%)`);
 }
+console.log(`\naudit found ${issues.length} issues:`);
+const ic: Record<string, number> = {};
+for (const i of issues) ic[i.kind] = (ic[i.kind] ?? 0) + 1;
+for (const [k, v] of Object.entries(ic)) console.log(`  ${String(v).padStart(4)}  ${k}`);
