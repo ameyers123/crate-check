@@ -179,13 +179,63 @@ function functionTags(f: Features, th: Thresholds): Tag[] {
   return out;
 }
 
+/**
+ * Energy, 1-10.
+ *
+ * The most-used field in any DJ library, and the one no analyzer outputs
+ * directly. It's a blend of how hard a record hits (aggressive), how much it
+ * asks the floor to move (party, danceability) and how fast it is.
+ */
+export function energyOf(f: Features, th: Thresholds): { energy: number; trace: string } {
+  const m = f.mood;
+  const bpmPart = Math.max(0, Math.min(1, (f.bpm - 100) / 40));
+  const raw =
+    0.34 * m.party + 0.28 * m.aggressive + 0.18 * f.danceability + 0.20 * bpmPart;
+  const energy = Math.max(1, Math.min(10, Math.round(raw * 12)));
+  return {
+    energy,
+    trace: `party ${r2(m.party)} · aggressive ${r2(m.aggressive)} · danceability ${r2(f.danceability)} · ${f.bpm} BPM`,
+  };
+}
+
+/** The back-pocket roles. Each is a composite of the fields above. */
+function roleTags(f: Features, energy: number, fnTags: Tag[]): Tag[] {
+  const out: Tag[] = [];
+  const add = (name: string, trace: string) => out.push({ name, group: "role", trace });
+  const isPeak = fnTags.some((t) => t.name === "Peak");
+  const known = f.familiarity === "anthem" || f.familiarity === "known";
+
+  // Guaranteed reaction: the floor knows it and it hits hard.
+  if (known && energy >= 8 && isPeak) {
+    add("Floor Saver", `${f.familiarity}, energy ${energy}/10, tagged Peak`);
+  }
+  // Re-engages a room that has drifted — recognition does the work, not volume.
+  if (f.familiarity === "anthem" && f.vocalDetail !== "none") {
+    add("Reset", `anthem with a ${f.vocalDetail} vocal — recognised in a couple of bars`);
+  }
+  // Sits under almost anything: no vocal to clash, no strong key centre.
+  if (f.vocalDetail === "none" && f.rhythm === "four-on-the-floor" && f.mood.emotional < 0.45) {
+    add("Bridge / Tool", `instrumental, four-on-the-floor, low melodic content — mixes under a key clash`);
+  }
+  // Can come in almost anywhere without a hard beatmatch.
+  if (f.intro === "beatless" || f.intro === "long mixable") {
+    add("Safe Drop", `${f.intro} intro — you can bring it in without a tight beatmatch`);
+  }
+  return out;
+}
+
 export function tagTrack(track: Track, th: Thresholds): TaggedTrack {
+  const fnTags = functionTags(track.features, th);
+  const { energy, trace } = energyOf(track.features, th);
   return {
     ...track,
+    energy,
+    energyTrace: trace,
     tags: [
       ...genreTags(track.features, th),
       ...vibeTags(track.features, th),
-      ...functionTags(track.features, th),
+      ...fnTags,
+      ...roleTags(track.features, energy, fnTags),
     ],
   };
 }

@@ -39,7 +39,7 @@ export default function Audit({ library }: { library: Track[] }) {
         </p>
         <div className="mt-5 flex flex-wrap items-center gap-3 border-t border-edge/70 pt-4">
           <span className="font-mono text-2xl">{library.length}</span>
-          <span className="text-[13px] text-muted">tracks scanned</span>
+          <span className="text-[13px] text-muted">new files scanned</span>
           <span className="ml-auto font-mono text-2xl text-fail">{issues.length}</span>
           <span className="text-[13px] text-muted">need a look</span>
         </div>

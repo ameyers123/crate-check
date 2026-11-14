@@ -9,12 +9,14 @@ const GROUP_STYLE: Record<Tag["group"], string> = {
   genre: "border-accent/35 bg-accent/10 text-accent",
   vibe: "border-review/35 bg-review/10 text-review",
   function: "border-foreground/25 bg-foreground/10 text-foreground/90",
+  role: "border-fail/35 bg-fail/10 text-fail",
 };
 
 const GROUP_NOTE: Record<Tag["group"], string> = {
   genre: "What it is",
   vibe: "How it feels",
   function: "Where it goes in a night",
+  role: "What it\u2019s for when things go wrong",
 };
 
 const mmss = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
@@ -170,7 +172,7 @@ export default function Analyze({ library }: { library: Track[] }) {
 
         {done ? (
           <div className="mt-4 space-y-5">
-            {(["genre", "vibe", "function"] as const).map((g) => {
+            {(["genre", "vibe", "function", "role"] as const).map((g) => {
               const tags = byGroup(g);
               if (tags.length === 0) return null;
               return (

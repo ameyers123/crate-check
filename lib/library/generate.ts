@@ -86,14 +86,21 @@ function buildFeatures(r: () => number, arch: Archetype): Features {
     approachability: base("approachability", 0.45),
   };
 
+  const vocal = r() < 0.55 ? clamp01(gauss(r, 0.75, 0.15)) : clamp01(gauss(r, 0.22, 0.14));
   return {
     bpm: Math.round(gauss(r, p.bpm, 3) * 2) / 2,
     key: pick(r, KEYS),
     durationS: Math.round(gauss(r, 330, 70)),
     danceability: clamp01(gauss(r, 0.9, 0.08)),
-    vocal: r() < 0.55 ? clamp01(gauss(r, 0.75, 0.15)) : clamp01(gauss(r, 0.22, 0.14)),
+    vocal,
     genre,
     mood,
+    intro: pick(r, ["beatless", "long mixable", "short", "cold open"] as const),
+    outro: r() < 0.7 ? "clean" : "fade",
+    familiarity: pick(r, ["anthem", "known", "deep cut", "deep cut"] as const),
+    vocalDetail: vocal >= 0.5 ? pick(r, ["male", "female", "spoken", "chopped"] as const) : "none",
+    rhythm: arch === "breaks" ? "broken" : arch === "disco" ? "swung" : "four-on-the-floor",
+    hasBreakdown: r() < 0.7,
   };
 }
 

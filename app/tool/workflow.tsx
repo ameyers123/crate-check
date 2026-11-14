@@ -5,8 +5,9 @@ export const STEPS = [
   { id: "collect", n: 2, name: "Collect", sub: "Get the files", tool: false },
   { id: "check", n: 3, name: "Check", sub: "Are they what they claim?", tool: true },
   { id: "analyze", n: 4, name: "Analyze & tag", sub: "Read the audio, label it", tool: true },
-  { id: "build", n: 5, name: "Build", sub: "Search by feel, plan a set", tool: true },
-  { id: "export", n: 6, name: "Export", sub: "Back into Rekordbox", tool: true },
+  { id: "plan", n: 5, name: "Plan", sub: "Shape the set beforehand", tool: true },
+  { id: "live", n: 6, name: "Play live", sub: "Decide what goes next", tool: true },
+  { id: "export", n: 7, name: "Export", sub: "Back into Rekordbox", tool: true },
 ] as const;
 
 export default function Workflow() {
@@ -25,7 +26,7 @@ export default function Workflow() {
           </span>
         </div>
 
-        <ol className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+        <ol className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-7">
           {STEPS.map((s) => (
             <li key={s.id}>
               <a
@@ -51,7 +52,7 @@ export default function Workflow() {
         </ol>
 
         <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-muted">
-          Steps 3 to 6 are normally split across Rekordbox, Lexicon, Mixed In Key and a
+          Steps 3 to 7 are normally split across Rekordbox, Lexicon, Mixed In Key and a
           spreadsheet. This does them in one place and hands the result back to Rekordbox,
           so you keep organising and playing where you already do.
         </p>
