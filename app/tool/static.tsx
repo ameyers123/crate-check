@@ -1,4 +1,30 @@
+import { ENGINE_AS_OF, ENGINE_STATUS_LABEL, STEP_BY_ID } from "@/lib/pipeline/steps";
+import type { StepId } from "@/lib/pipeline/steps";
 import { Section } from "../sections/ui";
+
+/**
+ * What the engine behind this demo does at a step, and how far it has got.
+ * Used by the sections for steps the demo itself doesn't run.
+ */
+function EngineNote({ step }: { step: StepId }) {
+  const e = STEP_BY_ID[step].engine;
+  if (!e) return null;
+  return (
+    <div className="mt-4 rounded-xl border border-edge bg-panel/40 p-5">
+      <div className="flex flex-wrap items-center gap-2">
+        <h3 className="font-mono text-[11px] tracking-[0.16em] text-muted uppercase">
+          In the engine behind this demo
+        </h3>
+        <span className="rounded border border-edge px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-muted">
+          {ENGINE_STATUS_LABEL[e.status]}
+        </span>
+        <span className="ml-auto font-mono text-[11px] text-muted">as of {ENGINE_AS_OF}</span>
+      </div>
+      <p className="mt-2.5 max-w-3xl text-[13px] leading-relaxed text-foreground/80">{e.does}</p>
+      {e.open && <p className="mt-2 max-w-3xl text-[13px] leading-relaxed text-muted">{e.open}</p>}
+    </div>
+  );
+}
 
 export function Hero({ trackCount }: { trackCount: number }) {
   return (
@@ -43,7 +69,7 @@ export function Find() {
   ];
   return (
     <Section
-      n={1}
+      n={STEP_BY_ID.find.n}
       id="find"
       kicker="Find"
       title="Deciding what to look for"
@@ -61,6 +87,49 @@ export function Find() {
         This step happens outside the tool — in whatever you already use to listen. What
         matters downstream is that you end up with a list of tracks you want.
       </p>
+      <EngineNote step="find" />
+    </Section>
+  );
+}
+
+export function Match() {
+  const sorts = [
+    {
+      k: "Owned",
+      d: "The song is in the library, as the same recording. Nothing to collect.",
+    },
+    {
+      k: "Needs a look",
+      d: "Something close is there: you have the remix and the list says the original. Flagged for you to decide, never swapped in.",
+    },
+    {
+      k: "Missing",
+      d: "Nothing in the library matches. This is the only list worth collecting from.",
+    },
+  ];
+  return (
+    <Section
+      n={STEP_BY_ID.match.n}
+      id="match"
+      kicker="Match"
+      title="Before you collect anything, find out what you already own"
+      lede="A want list is a list of songs. Your library is a pile of files with spellings of its own. Matching is how the first becomes a short list of what is actually missing, and it is the step that stops you from owning the same record twice."
+    >
+      <div className="grid gap-2.5 sm:grid-cols-3">
+        {sorts.map((s) => (
+          <div key={s.k} className="rounded-xl border border-edge bg-panel/60 p-4">
+            <div className="text-[14px] font-medium">{s.k}</div>
+            <p className="mt-1.5 text-[13px] leading-relaxed text-muted">{s.d}</p>
+          </div>
+        ))}
+      </div>
+      <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-muted">
+        Most of the work is spelling. &ldquo;Callaíta&rdquo; and &ldquo;Callaita&rdquo; are one
+        song; &ldquo;A ft. B&rdquo; is two artists, not one called that. A matcher that misses
+        those makes owned songs look missing, and you collect them again. This step happens in
+        the engine behind this demo, not in the browser.
+      </p>
+      <EngineNote step="match" />
     </Section>
   );
 }
@@ -68,7 +137,7 @@ export function Find() {
 export function Collect() {
   return (
     <Section
-      n={2}
+      n={STEP_BY_ID.collect.n}
       id="collect"
       kicker="Collect"
       title="Getting the files"
@@ -113,6 +182,114 @@ export function Collect() {
           </p>
         </div>
       </details>
+      <EngineNote step="collect" />
+    </Section>
+  );
+}
+
+export function Library() {
+  const rules = [
+    { k: "Skips what you already have", d: "A song that is already in the library isn't copied in again." },
+    { k: "Near-matches wait for you", d: "A close call, such as a different mix of the same song, goes to a review folder instead of straight in." },
+    { k: "Never overwrites, never moves", d: "The original stays where it was, and nothing already in the library is replaced." },
+    { k: "Remembers where each file came from", d: "So a wrong one can be traced back to the batch that brought it in." },
+  ];
+  return (
+    <Section
+      n={STEP_BY_ID.library.n}
+      id="library"
+      kicker="Library"
+      title="One safe door into the place your music lives"
+      lede="Playlists don't hold music, they point at it. That makes the library the one folder where a wrong file does damage everywhere, so getting a file in is a step with rules, not a drag and drop."
+    >
+      <div className="grid gap-2.5 sm:grid-cols-2">
+        {rules.map((r) => (
+          <div key={r.k} className="rounded-xl border border-edge bg-panel/60 p-4">
+            <div className="text-[14px] font-medium">{r.k}</div>
+            <p className="mt-1.5 text-[13px] leading-relaxed text-muted">{r.d}</p>
+          </div>
+        ))}
+      </div>
+      <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-muted">
+        It is a dry run unless you say to apply, so you see what would be copied first. Once new
+        files are in, matching runs again so the next playlist picks them up in order.
+      </p>
+      <EngineNote step="library" />
+    </Section>
+  );
+}
+
+export function Import() {
+  return (
+    <Section
+      n={STEP_BY_ID.import.n}
+      id="import"
+      kicker="Import"
+      title="Get them into Rekordbox in the order you meant"
+      lede="Rekordbox is the first place the tracks stop being files and become a library: it reads them, analyzes them and holds your playlists. The cheapest way to get a hundred songs in, in order, is one playlist file."
+    >
+      <div className="grid gap-3 sm:grid-cols-2">
+        <div className="rounded-xl border border-edge bg-panel/60 p-5">
+          <h3 className="text-[14px] font-medium">What gets written</h3>
+          <div className="mt-3 space-y-2 font-mono text-[12px]">
+            {[
+              ["XML", "a Rekordbox playlist, in order"],
+              ["M3U8", "the same, for anything else"],
+              ["Missing", "what the list wanted and you don't have"],
+            ].map(([field, value]) => (
+              <div key={field} className="flex gap-3">
+                <span className="w-20 shrink-0 text-muted">{field}</span>
+                <span className="text-foreground/85">{value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="rounded-xl border border-edge bg-panel/60 p-5">
+          <h3 className="text-[14px] font-medium">What you do</h3>
+          <p className="mt-2 text-[13px] leading-relaxed text-muted">
+            Import either file in Rekordbox, then let it analyze the new tracks. Without the
+            playlist file you can still drop the files in loose and order them by hand. That is
+            fine for ten tracks and slow for a hundred.
+          </p>
+          <p className="mt-3 text-[13px] leading-relaxed text-muted">
+            Nothing here edits Rekordbox&rsquo;s database. It imports a file you hand it, the
+            way it would from anyone.
+          </p>
+        </div>
+      </div>
+      <EngineNote step="import" />
+    </Section>
+  );
+}
+
+export function Crates() {
+  const kinds = [
+    { k: "Genre", d: "House, Techno, Disco and the rest of the genre tags." },
+    { k: "Vibe", d: "A handful of feels: the ones you would actually ask for." },
+    { k: "Set function", d: "Warm-up, driving, peak, afterhours." },
+    { k: "Combinations", d: "Tech House · Driving. Where two tags meet is usually what you are after." },
+  ];
+  return (
+    <Section
+      n={STEP_BY_ID.crates.n}
+      id="crates"
+      kicker="Crates"
+      title="Tags are only useful in the booth if you can open them"
+      lede="A tag on a track is a search you hope to have time for. A crate is the same tag already turned into a folder on the CDJ, so mid-set you open one instead of scrolling a few thousand records."
+    >
+      <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
+        {kinds.map((k) => (
+          <div key={k.k} className="rounded-xl border border-edge bg-panel/60 p-4">
+            <div className="text-[14px] font-medium">{k.k}</div>
+            <p className="mt-1.5 text-[13px] leading-relaxed text-muted">{k.d}</p>
+          </div>
+        ))}
+      </div>
+      <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-muted">
+        Optional, and the least finished step on this page. Without crates you browse by playlist
+        and filename, which works, and is what the set-building step further down shortens.
+      </p>
+      <EngineNote step="crates" />
     </Section>
   );
 }
@@ -120,7 +297,7 @@ export function Collect() {
 export function Export() {
   return (
     <Section
-      n={9}
+      n={STEP_BY_ID.export.n}
       id="export"
       kicker="Export"
       title="Hand it back to Rekordbox"
@@ -161,6 +338,7 @@ export function Export() {
           </p>
         </div>
       </div>
+      <EngineNote step="export" />
     </Section>
   );
 }
@@ -186,6 +364,17 @@ export function Closing() {
             library: a vocabulary of overlapping genre, vibe and function tags, with
             thresholds set as percentiles of the library itself rather than fixed constants,
             and a recorded reason for every tag so a wrong one can be argued with.
+          </p>
+        </div>
+        <div className="rounded-xl border border-edge bg-panel/40 p-5 text-[13px] leading-relaxed text-muted">
+          <p>
+            <strong className="text-foreground/80">The engine behind it.</strong> This page is
+            the public demo. Behind it is crate-engine, a private command-line tool that runs
+            the same ideas against a real library: matching a want list against the files you
+            own, adding new files safely, writing ordered playlists for Rekordbox and reading
+            Rekordbox&rsquo;s analysis from a copy. The map at the top is its step map. The
+            &ldquo;in the engine&rdquo; notes say how far each step has actually got, including
+            the steps that aren&rsquo;t built.
           </p>
         </div>
         <div className="rounded-xl border border-edge bg-panel/40 p-5 text-[13px] leading-relaxed text-muted">

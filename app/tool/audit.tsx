@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { auditLibrary, ISSUE_LABEL } from "@/lib/library/audit";
 import type { IssueKind } from "@/lib/library/audit";
 import type { Track } from "@/lib/library/types";
+import { STEP_BY_ID } from "@/lib/pipeline/steps";
 import { Section } from "../sections/ui";
 
 const mmss = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
@@ -22,7 +23,7 @@ export default function Audit({ library }: { library: Track[] }) {
 
   return (
     <Section
-      n={3}
+      n={STEP_BY_ID.check.n}
       id="check"
       kicker="Check"
       title="Find the files that aren't what they say they are"

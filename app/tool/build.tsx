@@ -7,6 +7,7 @@ import type { PlannedSlot, SetShape } from "@/lib/library/setshapes";
 import { keyDistance } from "@/lib/library/mixing";
 import type { TaggedTrack } from "@/lib/library/types";
 import { VIBE_TAGS } from "@/lib/library/types";
+import { STEP_BY_ID } from "@/lib/pipeline/steps";
 import { Section } from "../sections/ui";
 
 const mmss = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
@@ -63,7 +64,7 @@ export default function Build({
 
   return (
     <Section
-      n={8}
+      n={STEP_BY_ID.plan.n}
       id="plan"
       kicker="Plan"
       title="A set has a shape, and the shape depends on the job"

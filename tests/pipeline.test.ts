@@ -1,5 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { PRESETS, STEPS, STEP_BY_ID, evaluate } from "../lib/pipeline/steps";
+import {
+  ENGINE_PHASES,
+  ENGINE_RULES,
+  ENGINE_STATUS_LABEL,
+  PRESETS,
+  STEPS,
+  STEP_BY_ID,
+  evaluate,
+} from "../lib/pipeline/steps";
 import type { StepId } from "../lib/pipeline/steps";
 import {
   alignmentAt,
@@ -18,8 +26,15 @@ import { tagLibrary } from "../lib/library/tagger";
 /* ------------------------------------------------------------ the model -- */
 
 describe("pipeline model", () => {
-  it("numbers the steps 1 to 11 in order", () => {
-    expect(STEPS.map((s) => s.n)).toEqual(Array.from({ length: 11 }, (_, i) => i + 1));
+  it("numbers the steps 1 to 15 in order", () => {
+    expect(STEPS.map((s) => s.n)).toEqual(Array.from({ length: 15 }, (_, i) => i + 1));
+  });
+
+  it("keeps the three phases contiguous, in order", () => {
+    const order = ["Get the music", "Prepare it", "Play it"];
+    const idx = STEPS.map((s) => order.indexOf(s.phase));
+    expect(idx.every((i) => i >= 0)).toBe(true);
+    expect([...idx].sort((a, b) => a - b)).toEqual(idx);
   });
 
   it("every consequence lands on a real step that comes later", () => {
@@ -50,6 +65,73 @@ describe("pipeline model", () => {
   });
 });
 
+/* ------------------------------------------------------ the engine layer -- */
+
+describe("engine layer", () => {
+  const withEngine = STEPS.filter((s) => s.engine);
+
+  it("covers the steps the engine actually has, and none of the Rekordbox-only ones", () => {
+    expect(withEngine.map((s) => s.id)).toEqual([
+      "find",
+      "match",
+      "collect",
+      "check",
+      "library",
+      "import",
+      "analyze",
+      "tag",
+      "crates",
+      "export",
+    ]);
+    for (const id of ["beatgrid", "cues", "plan", "load", "transition"] as StepId[]) {
+      expect(STEP_BY_ID[id].engine, id).toBeUndefined();
+    }
+  });
+
+  it("gives every engine stage a real status and a description", () => {
+    for (const s of withEngine) {
+      expect(Object.keys(ENGINE_STATUS_LABEL), s.id).toContain(s.engine!.status);
+      expect(s.engine!.does.length, s.id).toBeGreaterThan(20);
+    }
+  });
+
+  it("says plainly what isn't built or isn't confirmed", () => {
+    // Anything short of proven has to carry a note about what's left.
+    for (const s of withEngine.filter((x) => x.engine!.status !== "proven" && x.engine!.status !== "manual")) {
+      expect(s.engine!.open?.length ?? 0, s.id).toBeGreaterThan(0);
+    }
+    expect(STEP_BY_ID.crates.engine!.status).toBe("planned");
+  });
+
+  it("takes keys from Rekordbox or Mixed In Key, and says detectors disagree", () => {
+    const why = STEP_BY_ID.analyze.why;
+    expect(why).toMatch(/disagree/);
+    expect(why).toMatch(/Rekordbox/);
+    expect(why).toMatch(/Mixed In Key/);
+    expect(STEP_BY_ID.analyze.engine!.open).toMatch(/Keys are Rekordbox's, not the engine's/);
+  });
+
+  it("lists the five phases in order, with one honest status each", () => {
+    expect(ENGINE_PHASES.map((p) => p.n)).toEqual([0, 1, 2, 3, 4]);
+    for (const p of ENGINE_PHASES) {
+      expect(["done", "in progress", "not started"], p.title).toContain(p.status);
+      expect(p.goal.length, p.title).toBeGreaterThan(0);
+      expect(p.done.length, p.title).toBeGreaterThan(0);
+    }
+    expect(ENGINE_RULES.length).toBeGreaterThan(0);
+  });
+
+  it("stays public-safe: no home-directory paths in the public step map", () => {
+    // Built from fragments so this file doesn't trip over its own patterns.
+    const banned = ["/" + "Users", "/" + "home/", "~" + "/", "C:" + "\\"];
+    const text = JSON.stringify({ STEPS, ENGINE_PHASES, ENGINE_RULES });
+    for (const b of banned) expect(text.includes(b), b).toBe(false);
+    // Collect is described as buy-or-bring.
+    expect(STEP_BY_ID.collect.does).toMatch(/buy them/);
+    expect(STEP_BY_ID.collect.does).toMatch(/bring them/);
+  });
+});
+
 /* ----------------------------------------------------------- evaluation -- */
 
 describe("skipping steps", () => {
@@ -68,6 +150,27 @@ describe("skipping steps", () => {
     expect(ev.states.transition.status).toBe("degraded");
     expect(ev.states.transition.hitBy.some((c) => c.from === "beatgrid" && c.severity === "severe")).toBe(true);
     expect(ev.outcome.tone).toBe("bad");
+  });
+
+  it("skipping the match costs you duplicates and a rebuilt order, not the night", () => {
+    const ev = evaluate(["match"]);
+    expect(ev.blockedCount).toBe(0);
+    expect(ev.states.collect.status).toBe("degraded");
+    expect(ev.states.import.status).toBe("degraded");
+    expect(ev.outcome.tone).toBe("ok");
+  });
+
+  it("skipping the import blocks analysis, and with it everything that reads the numbers", () => {
+    const ev = evaluate(["import"]);
+    for (const id of ["analyze", "tag", "crates", "beatgrid", "export", "load", "transition"] as StepId[]) {
+      expect(ev.states[id].status, id).toBe("blocked");
+    }
+  });
+
+  it("no tags means no crates", () => {
+    const ev = evaluate(["tag"]);
+    expect(ev.states.crates.status).toBe("blocked");
+    expect(ev.states.transition.status).not.toBe("blocked");
   });
 
   it("forgetting to export blocks everything in the booth", () => {

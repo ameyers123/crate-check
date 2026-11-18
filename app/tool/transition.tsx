@@ -13,6 +13,7 @@ import {
 import type { Alignment } from "@/lib/library/phrasing";
 import { keyDistance } from "@/lib/library/mixing";
 import type { TaggedTrack } from "@/lib/library/types";
+import { STEP_BY_ID } from "@/lib/pipeline/steps";
 import { Section } from "../sections/ui";
 
 const ALIGN: Record<Alignment, { label: string; tone: string; chip: string; text: string }> = {
@@ -102,7 +103,7 @@ export default function Transition({ crate, shapeName }: { crate: TaggedTrack[];
 
   return (
     <Section
-      n={11}
+      n={STEP_BY_ID.transition.n}
       id="transition"
       kicker="Transition"
       title="Where the incoming record starts decides whether the mix works"

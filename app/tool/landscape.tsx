@@ -210,8 +210,10 @@ export default function Landscape() {
               <strong className="text-foreground">Where crate-check overlaps, honestly:</strong>{" "}
               Mixed In Key also gives an energy score, and Lexicon also edits tags. It
               doesn&rsquo;t replace either — trust a dedicated key detector for key, and use
-              Lexicon to keep libraries in sync. What none of them do is describe how a record
-              feels or where it belongs in a night.
+              Lexicon to keep libraries in sync. Key detectors disagree often on dance music,
+              so crate-check never claims a key of its own: it reads Rekordbox&rsquo;s, or
+              Mixed In Key&rsquo;s. What none of them do is describe how a record feels or
+              where it belongs in a night.
             </div>
           </div>
         </div>

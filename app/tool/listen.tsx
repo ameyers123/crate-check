@@ -3,6 +3,7 @@
 import { useCallback, useRef, useState } from "react";
 import { analyzeAudio } from "@/lib/library/analyze-audio";
 import type { AudioAnalysis } from "@/lib/library/analyze-audio";
+import { STEP_BY_ID } from "@/lib/pipeline/steps";
 import { Section } from "../sections/ui";
 
 const CLIPS = [
@@ -109,7 +110,7 @@ export default function Listen() {
 
   return (
     <Section
-      n={4}
+      n={STEP_BY_ID.analyze.n}
       id="listen"
       kicker="Analyze"
       title="Everything above starts from numbers. Here is where they come from."
@@ -223,6 +224,21 @@ export default function Listen() {
           passes every one of them. Two measurements over the actual samples catch it in about a
           second. Knowing which checks are cheap and which need the audio is most of the work of
           deciding what to run, and when.
+        </p>
+      </div>
+
+      <div className="mt-4 rounded-xl border border-review/25 bg-review/[0.07] p-5">
+        <h3 className="text-[15px] font-medium">What this tab doesn&rsquo;t do: key</h3>
+        <p className="mt-2 max-w-3xl text-[13px] leading-relaxed text-foreground/80">
+          Tempo is the easy measurement. Key is not: detectors disagree often on dance music.
+          In a comparison of Rekordbox and Essentia on 100 tracks, both named the same key
+          for 63. Another 18 were a step on the wheel or a relative major/minor apart, which
+          still mixes. 19 were genuinely different, and neither tool is the ground truth.
+        </p>
+        <p className="mt-2 max-w-3xl text-[13px] leading-relaxed text-muted">
+          So crate-check never claims a key of its own. Keys come from Rekordbox or Mixed In
+          Key. The keys in this demo&rsquo;s catalog are illustrative, and the engine behind it
+          reports where detectors disagree instead of picking a winner.
         </p>
       </div>
     </Section>

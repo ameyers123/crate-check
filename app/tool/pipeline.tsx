@@ -1,8 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { PRESETS, STEPS, STEP_BY_ID, evaluate } from "@/lib/pipeline/steps";
-import type { Severity, Step, StepId, StepState } from "@/lib/pipeline/steps";
+import { ENGINE_STATUS_LABEL, PRESETS, STEPS, STEP_BY_ID, evaluate } from "@/lib/pipeline/steps";
+import type { EngineStatus, Severity, Step, StepId, StepState } from "@/lib/pipeline/steps";
+import EnginePhases from "./engine-phases";
 
 const LEVEL_STYLE: Record<Step["level"], string> = {
   required: "border-foreground/35 text-foreground/90",
@@ -16,10 +17,18 @@ const SEVERITY_STYLE: Record<Severity, { text: string; label: string }> = {
   annoying: { text: "text-review", label: "slower, riskier" },
 };
 
+const ENGINE_STYLE: Record<EngineStatus, string> = {
+  proven: "border-pass/40 text-pass",
+  tested: "border-accent/45 text-accent",
+  scripts: "border-review/45 text-review",
+  planned: "border-edge text-muted",
+  manual: "border-edge text-muted",
+};
+
 const ROLE_LABEL: Record<Step["crateCheck"], string> = {
-  "does it": "crate-check does this",
-  helps: "crate-check helps",
-  no: "outside crate-check",
+  "does it": "this demo does this",
+  helps: "this demo helps",
+  no: "not in this demo",
 };
 
 function nodeStyle(state: StepState): string {
@@ -63,7 +72,7 @@ function Detail({
         <dd>{step.who}</dd>
         <dt className="text-muted">Time</dt>
         <dd>{step.time}</dd>
-        <dt className="text-muted">This tool</dt>
+        <dt className="text-muted">This demo</dt>
         <dd className={step.crateCheck === "no" ? "text-muted" : "text-accent"}>
           {ROLE_LABEL[step.crateCheck]}
         </dd>
@@ -88,6 +97,26 @@ function Detail({
           </ul>
         )}
       </div>
+
+      {step.engine && (
+        <div className="mt-5 border-t border-edge/70 pt-4">
+          <div className="flex flex-wrap items-center gap-2">
+            <h4 className="font-mono text-[11px] tracking-[0.16em] text-muted uppercase">
+              In the engine behind this demo
+            </h4>
+            <span
+              className={`rounded border px-1.5 py-0.5 text-[10px] uppercase tracking-wide ${ENGINE_STYLE[step.engine.status]}`}
+            >
+              {ENGINE_STATUS_LABEL[step.engine.status]}
+            </span>
+          </div>
+          <p className="mt-2 text-[12px] text-muted">Stage: {step.engine.stage}</p>
+          <p className="mt-2 text-[13px] leading-relaxed text-foreground/80">{step.engine.does}</p>
+          {step.engine.open && (
+            <p className="mt-2 text-[13px] leading-relaxed text-muted">{step.engine.open}</p>
+          )}
+        </div>
+      )}
 
       {state.hitBy.length > 0 && (
         <div className="mt-4 rounded-lg border border-fail/25 bg-fail/[0.06] p-3">
@@ -169,9 +198,14 @@ export default function Pipeline() {
             From hearing a record to mixing it on a CDJ
           </h2>
           <p className="mt-3 text-[15px] leading-relaxed text-foreground/80">
-            Eleven steps. Some are required, some are worth the time, some are optional —
-            including one this tool does. Click a step to see what it involves. Skip it to
+            {STEPS.length} steps. Some are required, some are worth the time, some are optional —
+            including one this demo does. Click a step to see what it involves. Skip it to
             see what breaks further down.
+          </p>
+          <p className="mt-3 text-[13px] leading-relaxed text-muted">
+            This is also the step map of crate-engine, the private tool behind the demo. Where
+            the engine does something at a step, the panel says what, and how far it has
+            actually got.
           </p>
         </div>
 
@@ -316,6 +350,8 @@ export default function Pipeline() {
             </div>
           </div>
         </div>
+
+        <EnginePhases />
       </div>
     </section>
   );

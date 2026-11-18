@@ -10,6 +10,7 @@ import {
 } from "@/lib/library/mixing";
 import type { Emergency, NextCandidate, Signal } from "@/lib/library/mixing";
 import type { TaggedTrack } from "@/lib/library/types";
+import { STEP_BY_ID } from "@/lib/pipeline/steps";
 import { Section } from "../sections/ui";
 
 const TONE: Record<Signal["verdict"], string> = {
@@ -157,7 +158,7 @@ export default function Live({
 
   return (
     <Section
-      n={10}
+      n={STEP_BY_ID.load.n}
       id="live"
       kicker="Load & find"
       title="In the booth, you have about two minutes to decide"

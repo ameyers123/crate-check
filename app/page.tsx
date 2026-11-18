@@ -8,10 +8,10 @@ import { Beatgrid, CuePoints } from "./tool/prepare";
 import PrepAndPlay from "./tool/prep-and-play";
 import AuditView from "./tool/audit";
 import Landscape from "./tool/landscape";
-import { Hero, Find, Collect, Export, Closing } from "./tool/static";
+import { Hero, Find, Match, Collect, Library, Import, Crates, Export, Closing } from "./tool/static";
 
 /**
- * Sections run in pipeline order, 1 to 11. Export sits inside PrepAndPlay's
+ * Sections run in pipeline order, 1 to 15. Export sits inside PrepAndPlay's
  * slot because physically it happens between planning a set and playing it,
  * and the planned crate is shared state across both.
  */
@@ -23,10 +23,14 @@ export default function Home() {
       <Hero trackCount={library.length} />
       <Pipeline />
       <Find />
+      <Match />
       <Collect />
       <AuditView library={incoming} />
+      <Library />
+      <Import />
       <Listen />
       <Analyze library={library} />
+      <Crates />
       <Beatgrid library={library} />
       <CuePoints library={library} />
       <PrepAndPlay

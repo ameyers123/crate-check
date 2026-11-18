@@ -5,6 +5,7 @@ import { tagTrack, computeThresholds } from "@/lib/library/tagger";
 import type { Thresholds } from "@/lib/library/tagger";
 import { REFERENCE_CORPUS_SIZE, REFERENCE_THRESHOLDS } from "@/lib/library/reference";
 import type { Tag, Track } from "@/lib/library/types";
+import { STEP_BY_ID } from "@/lib/pipeline/steps";
 import { Section } from "../sections/ui";
 
 const GROUP_STYLE: Record<Tag["group"], string> = {
@@ -164,7 +165,7 @@ export default function Analyze({ library }: { library: Track[] }) {
 
   return (
     <Section
-      n={5}
+      n={STEP_BY_ID.tag.n}
       kicker="Tag"
       id="analyze"
       title="A file goes in. Something searchable comes out."

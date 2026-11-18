@@ -20,29 +20,63 @@ BPM and key are measurable, so everyone has them. Feel isn't, so nobody does.
 
 ## The whole pipeline, and what happens when you skip a step
 
-Getting a record from "I heard this" to mixing it on a CDJ takes eleven steps. They aren't equally important, and the honest version of this table labels this project's own headline feature optional.
+Getting a record from "I heard this" to mixing it on a CDJ takes fifteen steps. They aren't equally important, and the honest version of this table labels this project's own headline feature optional.
 
-| | step | level | who does it | this tool |
-|---|---|---|---|---|
-| 1 | **Find** — decide what you want | optional | you | — |
-| 2 | **Collect** — get the files | required | you | — |
-| 3 | **Check** — is each file what it claims? | recommended | crate-check | does it |
-| 4 | **Analyze** — measure the audio | required | Rekordbox · Mixed In Key · Essentia | helps |
-| 5 | **Tag** — turn numbers into words | **optional** | crate-check | does it |
-| 6 | **Beatgrid** — check where the beats fall | required | Rekordbox, then you | — |
-| 7 | **Cue points** — mark where things happen | recommended | Rekordbox · Mixed In Key | — |
-| 8 | **Plan** — shape the set | optional | crate-check | does it |
-| 9 | **Export** — put it on the USB | required | Rekordbox | — |
-| 10 | **Load & find** — pick what goes next | required | you, on the CDJ | helps |
-| 11 | **Transition** — mix it in | required | you | helps |
+Two things are merged into one map. **crate-check** is this public demo. **crate-engine** is the private command-line tool behind it, which runs the same ideas against a real library: matching a want list against the files you own, adding new files safely, writing ordered playlists for Rekordbox, and reading Rekordbox's analysis from a copy. The last column says how far the engine has actually got at each step, including the steps it hasn't built.
 
-The page opens on this as an interactive map. Click a step to see what it involves; **skip it to see what breaks further down.** Every step declares which later steps it damages and how badly:
+| | step | level | who does it | this demo | engine |
+|---|---|---|---|---|---|
+| 1 | **Find** — decide what you want | optional | you | — | proven |
+| 2 | **Match** — what do you already own? | required | crate-engine | — | proven |
+| 3 | **Collect** — get the files: buy them or bring them | required | you | — | tested |
+| 4 | **Check** — is each file what it claims? | recommended | crate-check | does it | scripts |
+| 5 | **Library** — copy the good files in | required | crate-engine | — | tested |
+| 6 | **Import** — get them into Rekordbox, in order | required | crate-engine writes it, you import | — | proven |
+| 7 | **Analyze** — measure the audio | required | Rekordbox · Mixed In Key · Essentia | helps | proven |
+| 8 | **Tag** — turn numbers into words | **optional** | crate-check | does it | scripts |
+| 9 | **Crates** — turn tags into folders | optional | crate-engine · Rekordbox | — | not built |
+| 10 | **Beatgrid** — check where the beats fall | required | Rekordbox, then you | — | — |
+| 11 | **Cue points** — mark where things happen | recommended | Rekordbox · Mixed In Key | — | — |
+| 12 | **Plan** — shape the set | optional | crate-check | does it | — |
+| 13 | **Export** — put it on the USB | required | Rekordbox | — | you do it |
+| 14 | **Load & find** — pick what goes next | required | you, on the CDJ | helps | — |
+| 15 | **Transition** — mix it in | required | you | helps | — |
+
+The engine column, as of 17 November 2026 (it will go stale): **proven** is run end to end on real data. **tested** works on a scratch copy and hasn't touched a real library yet. **scripts** works as loose scripts and isn't one command yet. **not built** is what it says. **you do it** is by hand, in another tool. A dash means the engine has no part in that step.
+
+The three phases are **Get the music** (1–5), **Prepare it** (6–13) and **Play it** (14–15).
+
+The page opens on this as an interactive map. Click a step to see what it involves, and what the engine does there; **skip it to see what breaks further down.** Every step declares which later steps it damages and how badly:
 
 - **can't happen** — skip Export and the tracks aren't on the stick; Load & find and the Transition never happen
 - **goes wrong** — skip the Beatgrid and sync holds for a few bars, then drifts; by bar 32 the kicks are flamming in front of people
-- **slower, riskier** — skip Tagging and you find the next record by filename, defaulting to the forty you can remember
+- **slower, riskier** — skip Tagging and you find the next record by filename, defaulting to the forty you can remember; skip Match and you collect songs you already own, with a remix quietly standing in for the original
 
-Blocked steps cascade, because a step that can't happen can't do its own job either. Presets show the common cases — *rushed before a gig*, *only what's required*, *forgot to export* — and a line at the bottom says where you end up.
+Blocked steps cascade, because a step that can't happen can't do its own job either. Presets show the common cases — *rushed before a gig*, *only what's required*, *forgot to export*, *didn't match first* — and a line at the bottom says where you end up.
+
+### A note on key
+
+Key is the least trustworthy number in the pipeline, and detectors disagree often on dance music. Comparing Rekordbox with Essentia on a 100-track sample, both named the same key for 63. Another 18 were a step round the Camelot wheel or a relative major/minor apart, which still mixes. 19 were genuinely different, and neither tool is the ground truth.
+
+So crate-check never claims a key of its own. Keys come from Rekordbox, or from Mixed In Key if you use it. The keys in the demo catalog are illustrative, and the engine reports where detectors disagree instead of picking a winner.
+
+## The engine behind it, phase by phase
+
+crate-engine is private. This is the order it's being built in, as of 17 November 2026:
+
+| phase | status | what it is |
+|---|---|---|
+| **0 Consolidate** | in progress | every step that worked once as a loose script becomes one command, all reading the same want list |
+| **1 Prove each use case** | not started | run each end to end, first on a tiny case (one owned song, one missing, one tricky remix), then on a real playlist. A use case only counts once it has reached the USB |
+| **2 See everything** | done | read-only pages for every job, every track's state, the playlist in order, and the files waiting in review |
+| **3 Buttons** | not started | approve and reject from those pages, each button running the same command a person would |
+| **4 Productize?** | in progress | decide whether a version that works on other people's files is worth building, and keep this demo honest about what exists |
+
+The rules it keeps about your files:
+
+- A dry run unless told to apply: it writes into the library only when you say so
+- Copies, never moves. Never overwrites
+- Reads a copy of Rekordbox's database. Never writes to it
 
 ## The tag vocabulary
 
@@ -135,10 +169,11 @@ Several tools each own a piece of this, connected by the file itself: each reads
 | **Mixed In Key** | dedicated key detection in Camelot notation, an energy score, cue points | key, energy, cues — written to tags |
 | **Essentia** | open-source audio analysis from the Music Technology Group at Universitat Pompeu Fabra; pretrained models return probabilities for genre styles, mood, vocals | numbers, not labels |
 | **crate-check** | turns those numbers into a vocabulary, checks files, plans sets, ranks what can follow | tags in standard metadata fields |
+| **crate-engine** (private) | the tool behind this demo: matches want lists to files you own, adds new files safely, writes ordered playlists, reads Rekordbox's analysis from a copy | playlists for Rekordbox, match and review reports |
 | **Rekordbox** (library) | where the library lives — playlists, grids, cues — and what exports to USB | everything the CDJ needs |
 | **Lexicon** | keeps libraries in sync between DJ apps; bulk tag edits, duplicates, cleanup | a tidier, mirrored library |
 
-**Where this overlaps, honestly:** Mixed In Key also gives an energy score, and Lexicon also edits tags. crate-check replaces neither — trust a dedicated key detector for key, and use Lexicon to keep libraries in sync. It doesn't fix beatgrids, set cues, export to USB, play audio or download anything. What none of the others do is describe how a record feels or where it belongs in a night.
+**Where this overlaps, honestly:** Mixed In Key also gives an energy score, and Lexicon also edits tags. crate-check replaces neither — trust a dedicated key detector for key, and use Lexicon to keep libraries in sync. Key detectors disagree often on dance music, so crate-check never claims a key of its own: it reads Rekordbox's, or Mixed In Key's. It doesn't fix beatgrids, set cues, export to USB, play audio or download anything. What none of the others do is describe how a record feels or where it belongs in a night.
 
 ## Checking files
 
@@ -174,7 +209,7 @@ Because they live in the file, they travel with it. The reliable route from a ta
 
 ```bash
 npm install
-npm test      # 95 tests: tagging, Camelot maths, set shapes, audit, DSP, pipeline, phrasing
+npm test      # 105 tests: tagging, Camelot maths, set shapes, audit, DSP, pipeline, phrasing
 npm run generate # rebuild demo data, print tag coverage and every set shape's curve
 npm run dev   # the tool, at localhost:3000
 ```
@@ -193,7 +228,7 @@ lib/library/
   audit.ts           self-contained file checks
   catalog.ts         the 62-track demo catalog
 lib/pipeline/
-  steps.ts           the eleven steps, what each damages if skipped, and the cascade
+  steps.ts           the fifteen steps, what each damages if skipped, the engine layer, and the cascade
 app/tool/            the interface — same modules, running in the browser
 ```
 
@@ -210,6 +245,8 @@ No personal library, listening history or playlists are published.
 ## Scope
 
 crate-check starts once files exist on your disk. It doesn't fetch anything, and acquisition stays outside it — whether a download is OK depends on the rights to that recording and the terms of the service hosting it, which is a decision for you rather than something to automate.
+
+The engine behind it is private. What's in this repo is the demo and the step map; the engine's stages are described here, not published.
 
 ## License
 

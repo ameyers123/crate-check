@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { msPerBeat, secondsPerBar, structureOf, waveformByBar } from "@/lib/library/phrasing";
 import type { SectionKind } from "@/lib/library/phrasing";
 import type { Track } from "@/lib/library/types";
+import { STEP_BY_ID } from "@/lib/pipeline/steps";
 import { Callout, Section } from "../sections/ui";
 
 const r3 = (x: number) => Math.round(x * 1000) / 1000;
@@ -133,7 +134,7 @@ export function Beatgrid({ library }: { library: Track[] }) {
 
   return (
     <Section
-      n={6}
+      n={STEP_BY_ID.beatgrid.n}
       id="beatgrid"
       kicker="Beatgrid"
       title="The grid every other tool trusts"
@@ -304,7 +305,7 @@ export function CuePoints({ library }: { library: Track[] }) {
 
   return (
     <Section
-      n={7}
+      n={STEP_BY_ID.cues.n}
       id="cues"
       kicker="Cue points"
       title="Mark where things happen, so you press instead of search"
